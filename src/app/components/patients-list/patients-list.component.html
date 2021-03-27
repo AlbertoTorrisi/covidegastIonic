@@ -1,6 +1,6 @@
-<ion-content class="ion-padding">
+<ion-content mode="ios" class="ion-padding">
   <ion-list>
-      <ion-item button *ngFor="let patient of patients" (click)="openModal(patient)">
+      <ion-item class="ion-activatable ripple-parent" *ngFor="let patient of patients" (click)="openModal(patient)">
         <ion-label>
           <h2>{{patient.name}} {{patient.surname}}</h2>
           <p>Positive: {{patient.positive}} </p>

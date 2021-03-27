@@ -7,14 +7,15 @@ import { PatientsListComponent } from './patients-list/patients-list.component';
 import { SwabsListComponent } from './swabs-list/swabs-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { PatientAddComponent } from './patient-add/patient-add.component';
 
 
 
 @NgModule({
-  declarations: [LoginComponent, LogoutComponent,PatientsListComponent,SwabsListComponent],
+  declarations: [LoginComponent, LogoutComponent,PatientsListComponent,SwabsListComponent, PatientAddComponent],
   imports: [
     CommonModule, FormsModule, IonicModule, ReactiveFormsModule, ModalsModule
   ],
-  exports:[LoginComponent, LogoutComponent,PatientsListComponent,SwabsListComponent],
+  exports:[LoginComponent, LogoutComponent,PatientsListComponent,SwabsListComponent,PatientAddComponent],
 })
 export class ComponentsModule { }

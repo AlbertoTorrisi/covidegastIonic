@@ -1,30 +1,27 @@
-<ion-header>
+<ion-header mode="ios">
   <ion-toolbar>
-      <ion-title>{{name}} {{surname}}</ion-title>        
-          <ion-button  mode='ios' slot="end" (click)="dismissModal()">Chiudi</ion-button>
+      <ion-title >{{name}} {{surname}}</ion-title>        
+          <ion-button size="small"  mode='ios' slot="end" (click)="dismissModal()">Chiudi</ion-button>
       </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding">
-
-<form [formGroup]="formPatient" (ngSubmit)="onSave()" >
-  <ion-item class="control">
-    <ion-label position="floating">Address</ion-label>
-    <ion-input type="text"  formControlName="address"></ion-input>
-  </ion-item>
-  <ion-item class="control">
-    <ion-label position="floating">Phone</ion-label>
-    <ion-input  formControlName="phone"></ion-input>
-  </ion-item>
-  <ion-item class="control">
-    <ion-label position="floating">Email</ion-label>
-    <ion-input  formControlName="email"></ion-input>
-  </ion-item>
-  <ion-item class="control">
-    <ion-label position="floating">Positive</ion-label>
-    <ion-input formControlName="positive"></ion-input>
-  </ion-item>
-  <ion-button mode='ios' [disabled]="formPatient.invalid" type="submit">Save</ion-button>
-</form>
- 
-
+<ion-content mode="ios" class="ion-padding">
+  <form [formGroup]="formPatient" mode="ios" (ngSubmit)="onSave()">
+    <ion-item class="control">
+      <ion-label position="floating">Address</ion-label>
+      <ion-input type="text" name="address" [(ngModel)]="address" formControlName="address"></ion-input>
+    </ion-item>
+    <ion-item class="control">
+      <ion-label position="floating">Phone</ion-label>
+      <ion-input type="text" name="phone" [(ngModel)]="phone" formControlName="phone"></ion-input>
+    </ion-item>
+    <ion-item class="control">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="text" name="email"  [(ngModel)]="email" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item  >
+      <ion-label>Positive</ion-label>
+      <ion-checkbox color="primary" mode='ios' name="positive"  formControlName="positive"></ion-checkbox>
+    </ion-item>
+    <ion-button  class="ion-padding" expand="block"  [disabled]="formPatient.invalid" type="submit">Save</ion-button>
+  </form>
 </ion-content>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmailValidator } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { ModalEditPatientComponent } from '../modals/modal-edit-patient/modal-edit-patient.component';
 
 @Component({
@@ -30,7 +30,7 @@ export class PatientsListComponent implements OnInit {
    }
  ];
    
- constructor(public modalController: ModalController) {
+ constructor(public modalController: ModalController, private alertCtrl: AlertController) {
  
  }
  
@@ -48,9 +48,25 @@ export class PatientsListComponent implements OnInit {
    });
     await modal.present();
 
-    const {data, role} = await modal.onWillDismiss();
-    console.log(data);
- }
+    const {data: patientModified, role} = await modal.onWillDismiss();
+    if(role === 'saved'){
+      const index = this.patients.findIndex(patient=> patient.name === account.name)
+      console.log(index)
+      console.log(patientModified.value)
+      
+      this.patients[index].address = patientModified.value.address;
+      this.patients[index].phone = patientModified.value.phone;
+      this.patients[index].email = patientModified.value.email;
+      if(patientModified.value.positive == null){
+        this.patients[index].positive = false;
+      }else{
+        this.patients[index].positive = patientModified.value.positive;
+      }
+      const alert = await this.alertCtrl.create({header:"Success", message:"Saved successfly!", buttons:["Close"]})
+      await alert.present()
+    }
+    
+  }
 
    ngOnInit() {}
  

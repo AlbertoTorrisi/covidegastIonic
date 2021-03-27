@@ -22,26 +22,19 @@ export class ModalEditPatientComponent implements OnInit {
       address:["", Validators.required],
       phone:["", Validators.required],
       email:["", Validators.required],
-      positive:["", Validators.required]
+      positive:this.positive,
     })
   }
 
   
 
-  patientInput = new FormControl('', Validators.required)
-
-
- 
 
   dismissModal=()=>{
-    this.modalCtrl.dismiss(null, 'cancel')
+     this.modalCtrl.dismiss(null, 'cancel')
   }
   
   onSave(){
-    console.log(this.formPatient)
     this.modalCtrl.dismiss(this.formPatient, 'saved')
-   
-
   }
 
   ngOnInit() {}
