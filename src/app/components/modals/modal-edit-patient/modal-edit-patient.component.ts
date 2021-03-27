@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-modal-edit-patient',
@@ -6,8 +8,41 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modal-edit-patient.component.scss'],
 })
 export class ModalEditPatientComponent implements OnInit {
+  @Input() name: string;
+  @Input() surname: string;
+  @Input() address:string;
+  @Input() phone:string;
+  @Input() email:string;
+  @Input() positive: boolean;
 
-  constructor() { }
+  formPatient: FormGroup;
+
+  constructor(builder:FormBuilder, private modalCtrl: ModalController) { 
+    this.formPatient= builder.group({
+      address:["", Validators.required],
+      phone:["", Validators.required],
+      email:["", Validators.required],
+      positive:["", Validators.required]
+    })
+  }
+
+  
+
+  patientInput = new FormControl('', Validators.required)
+
+
+ 
+
+  dismissModal=()=>{
+    this.modalCtrl.dismiss(null, 'cancel')
+  }
+  
+  onSave(){
+    console.log(this.formPatient)
+    this.modalCtrl.dismiss(this.formPatient, 'saved')
+   
+
+  }
 
   ngOnInit() {}
 
