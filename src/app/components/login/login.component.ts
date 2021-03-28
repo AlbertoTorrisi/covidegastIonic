@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
     this.service.login(this.username, this.password).subscribe(
       async (data: HttpResponse<any>) => {
         await this.authService.logIn(data.headers.get('x-auth-token'));
+        this.router.navigate(['tabs']);
       },
       (error) => {
         if (error.error.errors) {
