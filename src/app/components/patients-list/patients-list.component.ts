@@ -18,16 +18,16 @@ export class PatientsListComponent implements OnInit {
     private patientService: PatientsService
   ) {}
 
-  async openModal(account) {
+  async openModal(patient) {
     const modal = await this.modalController.create({
       component: ModalEditPatientComponent,
       componentProps: {
-        name: account.name,
-        surname: account.surname,
-        address: account.address,
-        phone: account.phone,
-        email: account.email,
-        positive: account.positive,
+        name: patient.name,
+        surname: patient.surname,
+        address: patient.address,
+        phone: patient.phone,
+        email: patient.email,
+        positive: patient.positive,
       },
     });
     await modal.present();
@@ -36,7 +36,10 @@ export class PatientsListComponent implements OnInit {
     if (role === 'saved') {
       const index =
         this.patients &&
-        this.patients.findIndex((patient) => patient.name === account.name);
+        this.patients.findIndex((patient) => patient.name === patient.name);
+      console.log(index);
+      console.log(patientModified.value);
+
       this.patients[index].address = patientModified.value.address;
       this.patients[index].phone = patientModified.value.phone;
       this.patients[index].email = patientModified.value.email;

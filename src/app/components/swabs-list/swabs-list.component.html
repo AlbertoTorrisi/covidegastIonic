@@ -1,3 +1,23 @@
-<p>
-  swabs-list works!
-</p>
+<ion-content class="ion-margin">
+  <ion-grid class="ion-margin">
+    <ion-row>
+      <ion-col *ngFor="let day of daysSelected">{{ day }}</ion-col>     
+    </ion-row>    
+      <ion-col *ngFor="let dayContent of daysSelectedContent">
+        <div *ngFor="let swab of dayContent"  class="card" (click)="openModalEditSwab(swab)">
+          <p><i class="fas fa-clock"></i>{{ swab.date.substring(10, 16) }} -</i></p>
+          <p>{{ swab.name }}</p>
+          <p><i class="fas fa-house-user"></i>{{ swab.address }}</p>
+          <p><i class="fas fa-phone"></i>{{ swab.phone }}</p>
+          <p>Done : <i [ngClass]="[swab.done ? 'far fa-check-circle' : 'fas fa-times']"></i></p>
+
+        </div>
+
+
+      </ion-col>
+    
+  </ion-grid>
+
+
+
+
