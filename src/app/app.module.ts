@@ -21,6 +21,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     AppRoutingModule,
     ComponentsModule,
     HttpClientModule,
+    
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

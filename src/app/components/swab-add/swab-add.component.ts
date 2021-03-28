@@ -17,6 +17,7 @@ export class SwabAddComponent implements OnInit {
   async openModal() {
     const modal = await this.modalController.create({
       component: ModalAddSwabComponent,
+      
     });
      await modal.present();
  

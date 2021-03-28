@@ -18,13 +18,13 @@ export class PatientsListComponent implements OnInit {
     private patientService: PatientsService
   ) {}
 
-  async openModal(patient) {
+  async openModalEditPatient(patient) {
     const modal = await this.modalController.create({
       component: ModalEditPatientComponent,
       componentProps: {
         name: patient.name,
-        surname: patient.surname,
         address: patient.address,
+        fiscal_code: patient.fiscal_code,
         phone: patient.phone,
         email: patient.email,
         positive: patient.positive,
@@ -59,5 +59,6 @@ export class PatientsListComponent implements OnInit {
 
   async ngOnInit() {
     this.patients = await this.patientService.getAllPatients();
+    console.log(this.patients)
   }
 }

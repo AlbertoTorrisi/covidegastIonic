@@ -1,3 +1,39 @@
-<p>
-  modal-edit-swab works!
-</p>
+<ion-header mode="ios">
+  <ion-toolbar>
+      <ion-title >{{date}} </ion-title>        
+          <ion-button size="small"  mode='ios' slot="end" (click)="dismissModal()">Chiudi</ion-button>
+      </ion-toolbar>
+</ion-header>
+<ion-content mode="ios" class="ion-padding">
+  <form [formGroup]="formSwab" mode="ios" (ngSubmit)="onSave()">
+    <ion-item>
+      <ion-label>Team</ion-label>
+      <ion-select name="team_id" type="number" [(ngModel)]="team_id" formControlName="team_id">
+        <ion-select-option value="1">Team-1</ion-select-option>
+        <ion-select-option value="2">Team-2</ion-select-option>
+        <ion-select-option value="3">Team-3</ion-select-option>        
+      </ion-select>
+    </ion-item>
+    <ion-item class="control">
+      <ion-label position="floating">Date</ion-label>
+      <ion-input type="date" name="date" [(ngModel)]="date" placeholder="" formControlName="date"></ion-input>
+    </ion-item>
+    <ion-item class="control">
+      <ion-label position="floating">Address</ion-label>
+      <ion-input type="text" name="address" [(ngModel)]="address" formControlName="address"></ion-input>
+    </ion-item>
+    <ion-item class="control">
+      <ion-label position="floating">Phone</ion-label>
+      <ion-input type="text" name="phone" [(ngModel)]="phone" formControlName="phone"></ion-input>
+    </ion-item>    
+    <ion-item>
+      <ion-label>Done</ion-label>
+      <ion-checkbox  color="primary" mode='ios' name="done" formControlName="done"></ion-checkbox>
+    </ion-item>
+    <ion-item >
+      <ion-label >Positive</ion-label>
+      <ion-checkbox color="primary" mode='ios' name="positive_res"  formControlName="positive_res"></ion-checkbox>
+    </ion-item>
+    <ion-button  class="ion-padding" expand="block"  [disabled]="formSwab.invalid" type="submit">Save</ion-button>
+  </form>
+</ion-content>

@@ -1,6 +1,29 @@
 <ion-content class="ion-margin">
   <ion-grid class="ion-margin">
     <ion-row>
+      <ion-col *ngFor="let daySwabs of swabs">{{ daySwabs[0] }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngFor="let daySwab of swabs">
+        <ion-col *ngFor="let swab of daySwab[1]" (click)="openModalEditSwab(swab)">
+            <div>
+              <p>{{swab.name}} </p>
+              <p><i class="fas fa-clock">{{ swab.date.substring(10, 16) }} -</i></p>
+              <p><i class="fas fa-house-user"></i>{{ swab.address }}</p>
+              <p><i class="fas fa-phone"></i>{{ swab.phone }}</p>
+              <p>Done :{{ swab.done }}</p>
+            </div>
+        </ion-col>      
+      </ion-col>
+    </ion-row>
+   
+  </ion-grid>
+</ion-content>
+
+<!--
+<ion-content class="ion-margin">
+  <ion-grid class="ion-margin">
+    <ion-row>
       <ion-col *ngFor="let day of daysSelected">{{ day }}</ion-col>
     </ion-row>
     <ion-col *ngFor="let dayContent of daysSelectedContent">
@@ -25,3 +48,10 @@
     </ion-col>
   </ion-grid>
 </ion-content>
+
+-->
+
+
+
+
+

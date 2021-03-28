@@ -14,6 +14,7 @@ export class ModalEditPatientComponent implements OnInit {
   @Input() phone:string;
   @Input() email:string;
   @Input() positive: boolean;
+  @Input() fiscal_code:string;
 
   formPatient: FormGroup;
 

@@ -10,7 +10,7 @@ import { ModalEditSwabComponent } from '../modals/modal-edit-swab/modal-edit-swa
   styleUrls: ['./swabs-list.component.scss'],
 })
 export class SwabsListComponent implements OnInit {
-  swabs: undefined[] | SwabCalendar = [];
+  swabs: any;
   public daysSelected: string[] = [];
   public daysSelectedContent: any[] = [];
 
@@ -21,7 +21,7 @@ export class SwabsListComponent implements OnInit {
     private alertCtrl: AlertController,
     private swabService: SwabsService
   ) {}
-
+/*
   async openModalEditSwab({
     swab_id,
     team_id,
@@ -52,21 +52,23 @@ export class SwabsListComponent implements OnInit {
     await modal.present();
 
     const { data: swabModified, role } = await modal.onWillDismiss();
-
-    const alert = await this.alertCtrl.create({
+    if(role === 'saved'){
+      const alert = await this.alertCtrl.create({
       header: 'Success',
       message: 'Saved successfly!',
       buttons: ['Close'],
     });
-    await alert.present();
+      await alert.present();
+    }
+    
   }
-
-  /*
-  async openModal(swab:Swab){
+*/
+  
+  async openModalEditSwab(swab){
+    console.log(swab)
     const modal = await this.modalController.create({
       component: ModalEditSwabComponent,
       componentProps: {
-        swab_id: swab.swab_id,
         team_id:  swab.team_id,
         date:  swab.date,
         type:  swab.type,
@@ -74,15 +76,33 @@ export class SwabsListComponent implements OnInit {
         positive_res:  swab.positive_res,
         name:  swab.name,
         phone:  swab.phone,
-        address:  swab.address,
-        patient_id:  swab.patient_id,
+        address:  swab.address,       
       },
 
     });
+    await modal.present();
+
+    const { data: swabModified, role } = await modal.onWillDismiss();
+    console.log(swabModified)
+    if(role === 'saved'){
+      const alert = await this.alertCtrl.create({
+      header: 'Success',
+      message: 'Saved successfly!',
+      buttons: ['Close'],
+    });
+      await alert.present();
+    }
   }
-*/
+
 
   async ngOnInit() {
-    // this.swabs = await this.swabService.allSwabs();
+    this.swabs = await this.swabService.allSwabs();
+    
+    this.swabs = Object.entries(this.swabs)
+     console.log(this.swabs);
+    
   }
+  
+
+
 }
