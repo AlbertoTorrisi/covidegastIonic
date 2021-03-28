@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
   logIn = () => {
+    console.log('we');
     this.service.login(this.username, this.password).subscribe(
       async (data: HttpResponse<any>) => {
         await this.localStorage.set('token', data.headers.get('x-auth-token'));

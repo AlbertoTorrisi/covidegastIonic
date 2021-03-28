@@ -7,13 +7,18 @@ export class LoginService {
   url: string = `https://covid19-tracker-server.herokuapp.com/users/login`;
   active: any;
   constructor(private httpClient: HttpClient) {}
-  login = (username: string, password: string) =>
-    this.httpClient.post<HttpResponse<any>>(
-      this.url,
-      {
-        username,
-        password,
-      },
-      { observe: 'response' }
-    );
+  login = (username: string, password: string) => {
+    try {
+      return this.httpClient.post<HttpResponse<any>>(
+        this.url,
+        {
+          username,
+          password,
+        },
+        { observe: 'response' }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
