@@ -1,44 +1,26 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+
+import { Storage } from '@ionic/storage-angular';
+
 @Injectable({
   providedIn: 'root',
 })
 export class LocalStorageService {
-  localStorage: Storage;
-  changes$ = new Subject();
-  constructor() {
-    this.localStorage = window.localStorage;
+  private _storage: Storage | null = null;
+
+  constructor(private storage: Storage) {
+    this.init();
   }
-  get(key: string): any {
-    if (this.isLocalStorageSupported) {
-      return this.localStorage.getItem(key) ?? '';
-    }
-    return null;
+
+  async init() {
+    // If using, define drivers here: await this.storage.defineDriver(/*...*/);
+    const storage = await this.storage.create();
+    this._storage = storage;
   }
-  set(key: string, value: any): boolean {
-    if (this.isLocalStorageSupported) {
-      this.localStorage.setItem(key, value);
-      this.changes$.next({
-        type: 'set',
-        key,
-        value,
-      });
-      return true;
-    }
-    return false;
-  }
-  remove(key: string): boolean {
-    if (this.isLocalStorageSupported) {
-      this.localStorage.removeItem(key);
-      this.changes$.next({
-        type: 'remove',
-        key,
-      });
-      return true;
-    }
-    return false;
-  }
-  get isLocalStorageSupported(): boolean {
-    return !!this.localStorage;
-  }
+
+  // Create and expose methods that users of this service can
+  // call, for example:
+  public set = async (key: string, value: any) =>
+    await this._storage?.set(key, value);
+  public get = async (key: string) => await this._storage?.get(key);
 }
