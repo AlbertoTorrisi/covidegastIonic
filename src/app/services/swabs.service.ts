@@ -2,7 +2,6 @@ import { SwabCalendar } from './../interface/list-of-swabs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Swab } from '../interface/list-of-swabs';
-import { LocalStorageService } from './local-storage.service';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -11,11 +10,7 @@ import { Router } from '@angular/router';
 export class SwabsService {
   url: string = 'https://covid19-tracker-server.herokuapp.com/swabs';
 
-  constructor(
-    private httpClient: HttpClient,
-    private localStorageService: LocalStorageService,
-    private router: Router
-  ) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
   handleHttpErrors = (err: any) => {
     alert(err.error ? err.error : 'Error');
     if (err.status === 401) {
@@ -25,23 +20,14 @@ export class SwabsService {
 
   allSwabs = () =>
     this.httpClient
-      .get<SwabCalendar>(this.url, {
-        headers: {
-          'x-auth-token': this.localStorageService.get('token'),
-        },
-      })
+      .get<SwabCalendar>(this.url)
       .toPromise()
       .catch(this.handleHttpErrors);
 
   allSwabsByDate = (dateStart: string, dateEnd: string) =>
     this.httpClient
       .get<SwabCalendar>(
-        `${this.url}?startDate=${dateStart}&endDate=${dateEnd}`,
-        {
-          headers: {
-            'x-auth-token': this.localStorageService.get('token'),
-          },
-        }
+        `${this.url}?startDate=${dateStart}&endDate=${dateEnd}`
       )
       .toPromise()
       .catch(this.handleHttpErrors);
@@ -54,22 +40,14 @@ export class SwabsService {
     done: number,
     positive_res: number
   ) =>
-    this.httpClient.post(
-      this.url,
-      {
-        team_id,
-        date,
-        type,
-        patient_id,
-        done,
-        positive_res,
-      },
-      {
-        headers: {
-          'x-auth-token': this.localStorageService.get('token'),
-        },
-      }
-    );
+    this.httpClient.post(this.url, {
+      team_id,
+      date,
+      type,
+      patient_id,
+      done,
+      positive_res,
+    });
   updateSwab = (
     swab_id: number,
     team_id: number,
@@ -79,29 +57,17 @@ export class SwabsService {
     done: number,
     positive_res: number
   ) =>
-    this.httpClient.put(
-      `${this.url}/${swab_id}`,
-      {
-        team_id,
-        date,
-        type,
-        patient_id,
-        done,
-        positive_res,
-      },
-      {
-        headers: {
-          'x-auth-token': this.localStorageService.get('token'),
-        },
-      }
-    );
+    this.httpClient.put(`${this.url}/${swab_id}`, {
+      team_id,
+      date,
+      type,
+      patient_id,
+      done,
+      positive_res,
+    });
   deleteSwab = (swab_id: number) =>
     this.httpClient
-      .delete(`${this.url}/${swab_id}`, {
-        headers: {
-          'x-auth-token': this.localStorageService.get('token'),
-        },
-      })
+      .delete(`${this.url}/${swab_id}`)
       .toPromise()
       .catch(this.handleHttpErrors);
 }

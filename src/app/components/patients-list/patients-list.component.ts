@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 // import { EmailValidator } from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
 import { ModalEditPatientComponent } from '../modals/modal-edit-patient/modal-edit-patient.component';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Patient } from 'src/app/interface/list-of-patients';
 @Component({
   selector: 'app-patients-list',
@@ -15,7 +14,6 @@ export class PatientsListComponent implements OnInit {
 
   constructor(
     public modalController: ModalController,
-    private localStorageService: LocalStorageService,
     private alertCtrl: AlertController,
     private patientService: PatientsService
   ) {}
@@ -39,9 +37,6 @@ export class PatientsListComponent implements OnInit {
       const index =
         this.patients &&
         this.patients.findIndex((patient) => patient.name === account.name);
-      console.log(index);
-      console.log(patientModified.value);
-
       this.patients[index].address = patientModified.value.address;
       this.patients[index].phone = patientModified.value.phone;
       this.patients[index].email = patientModified.value.email;
@@ -60,10 +55,6 @@ export class PatientsListComponent implements OnInit {
   }
 
   async ngOnInit() {
-    await this.localStorageService.set(
-      'x-auth-token',
-      'eyJhbGciOiJIUzI1NiJ9.dXNjYUdyYXZpbmE.eBTkTHmgC2BZuIMlSA7fY1S-RwcSR3amKc3M_KHP2xM'
-    );
     this.patients = await this.patientService.getAllPatients();
   }
 }

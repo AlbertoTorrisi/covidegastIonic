@@ -1,7 +1,7 @@
+import { AuthenticationService } from './../../services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { HttpResponse } from '@angular/common/http';
-import { LocalStorageService } from '../../services/local-storage.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,16 +17,14 @@ export class LoginComponent implements OnInit {
   constructor(
     private service: LoginService,
     private router: Router,
-    private localStorage: LocalStorageService
+    private authService: AuthenticationService
   ) {}
 
   ngOnInit(): void {}
   logIn = () => {
-    console.log('we');
     this.service.login(this.username, this.password).subscribe(
       async (data: HttpResponse<any>) => {
-        await this.localStorage.set('token', data.headers.get('x-auth-token'));
-        this.router.navigate(['home']);
+        await this.authService.logIn(data.headers.get('x-auth-token'));
       },
       (error) => {
         if (error.error.errors) {

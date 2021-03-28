@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../services/authentication.service';
 import {
   HttpRequest,
   HttpHandler,
@@ -16,32 +17,23 @@ import { Injectable } from '@angular/core';
 export class TokenInterceptor implements HttpInterceptor {
   constructor(
     private router: Router,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public authService: AuthenticationService
   ) {}
 
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token =
-      'eyJhbGciOiJIUzI1NiJ9.dXNjYUdyYXZpbmE.eBTkTHmgC2BZuIMlSA7fY1S-RwcSR3amKc3M_KHP2xM';
-
+    const token = this.authService.currentAuthTokenValue();
     if (token) {
       request = request.clone({
         setHeaders: {
           'x-auth-token': token,
-        },
-      });
-    }
-
-    if (!request.headers.has('Content-Type')) {
-      request = request.clone({
-        setHeaders: {
           'content-type': 'application/json',
         },
       });
     }
-
     request = request.clone({
       headers: request.headers.set('Accept', 'application/json'),
     });
@@ -52,16 +44,6 @@ export class TokenInterceptor implements HttpInterceptor {
           console.log('event--->>>', event);
         }
         return event;
-      }),
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 401) {
-          if (error.error.success === false) {
-            this.presentToast('Login failed');
-          } else {
-            this.router.navigate(['login']);
-          }
-        }
-        return throwError(error);
       })
     );
   }
