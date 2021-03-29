@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { Patient } from 'src/app/interface/list-of-patients';
 import { AddPatientService } from 'src/app/services/add-patient.service';
 import { PatientsService } from 'src/app/services/patients.service';
@@ -13,7 +13,12 @@ import { ModalAddPatientComponent } from '../modals/modal-add-patient/modal-add-
 })
 export class PatientAddComponent implements OnInit {
 
-  constructor(private modalController: ModalController, private patientsService:PatientsService, private addPatientService:AddPatientService) { }
+  constructor(
+    private modalController: ModalController,
+    private patientsService:PatientsService,
+    private addPatientService:AddPatientService,
+    private alertCtrl:AlertController) { }
+
   @Output() patientToAdd: EventEmitter<any> = new EventEmitter<any>()
   patient:any;
   ngOnInit() {}
@@ -41,12 +46,19 @@ export class PatientAddComponent implements OnInit {
           (Response) => {
             console.log('Patient Added');
             //il service funziona ma non so come richiamarlo nella lista...vedi-> patient-list.component.ts funzione reveicePatient() come la facciamo attivare al submit del nuovo utente?
-           this.addPatientService.setPatient(this.patient);
+           //this.addPatientService.setPatient(this.patient);
+           this.patientToAdd.emit(this.patient);
           },
           (error) => {
             console.log(error.error && error.error);
           }
         );
+        const alert = await this.alertCtrl.create({
+          header: 'Added',
+          message: 'Added successfly!',
+          buttons: ['Close'],
+        });
+        await alert.present();
      }
 
   }

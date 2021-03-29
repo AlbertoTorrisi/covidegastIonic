@@ -1,5 +1,5 @@
 import { PatientsService } from './../../services/patients.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 // import { EmailValidator } from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
 import { ModalEditPatientComponent } from '../modals/modal-edit-patient/modal-edit-patient.component';
@@ -11,8 +11,8 @@ import { AddPatientService } from 'src/app/services/add-patient.service';
   styleUrls: ['./patients-list.component.scss'],
 })
 export class PatientsListComponent implements OnInit {
-  patients: void | Patient[] = [];
-
+  @Input() patients: void | Patient[] = [];
+   //newPatients: void | Patient
   constructor(
     public modalController: ModalController,
     private alertCtrl: AlertController,
@@ -79,7 +79,7 @@ export class PatientsListComponent implements OnInit {
   }
 
   //con questa funzioen dovrebbe aggiornarsi la lista però non so come chiamarla. tramite (ionChange) sull'html non va
-  async reveicePatient(){   
+  async ngOnChanges(){   
     console.log("sono su receive patient"); 
     this.patients = await this.patientService.getAllPatients();
     this.patients.push(this.addPatientService.getPatient());
