@@ -19,7 +19,14 @@ export class PatientsListComponent implements OnInit {
     private patientService: PatientsService,
     private addPatientService: AddPatientService
   ) {}
-
+  async deletePatient(patientId) {
+    const res = await this.patientService.deletePatient(patientId);
+    this.patients
+      ? (this.patients = this.patients.filter(
+          ({ patient_id }) => patient_id !== patientId
+        ))
+      : null;
+  }
   async openModalEditPatient(patient) {
     const modal = await this.modalController.create({
       component: ModalEditPatientComponent,
@@ -30,7 +37,7 @@ export class PatientsListComponent implements OnInit {
         fiscal_code: patient.fiscal_code,
         phone: patient.phone,
         email: patient.email,
-        positive: patient.positive,
+        hasCovid: patient.hasCovid,
       },
     });
     await modal.present();
@@ -40,53 +47,38 @@ export class PatientsListComponent implements OnInit {
       const index =
         this.patients &&
         this.patients.findIndex((patient) => patient.name === patient.name);
-      console.log(index);
-      console.log(patientModified.value);
-
       this.patients[index].address = patientModified.value.address;
       this.patients[index].phone = patientModified.value.phone;
       this.patients[index].email = patientModified.value.email;
-      if (patientModified.value.positive == null) {
-        this.patients[index].positive = false;
+      if (patientModified.value.hasCovid == null) {
+        this.patients[index].hasCovid = false;
       } else {
-        this.patients[index].positive = patientModified.value.positive;
+        this.patients[index].hasCovid = patientModified.value.hasCovid;
       }
+      console.log(patientModified);
+      console.log(this.patients[index]);
+      const res = await this.patientService.updatePatient(
+        this.patients[index].patient_id,
+        this.patients[index].name,
+        this.patients[index].address,
+        this.patients[index].email,
+        this.patients[index].phone,
+        this.patients[index].hasCovid,
+        this.patients[index].dob,
+        this.patients[index].fiscal_code
+      );
+
       const alert = await this.alertCtrl.create({
         header: 'Success',
         message: 'Saved successfly!',
         buttons: ['Close'],
       });
-      await alert.present();
+      res && (await alert.present());
     }
-    if (role === 'deletePatient'){
-      console.log("ciao", patientModified);
-      await (await this.patientService.deletePatient(patientModified)).subscribe(
-        (Response) => {
-          console.log('Patient Deleted');
-        },
-        (error) => {
-          console.log(error.error && error.error);
-        }
-      );
-      const alert = await this.alertCtrl.create({
-        header: 'Deteled',
-        message: 'Deleted successfly!',
-        buttons: ['Close'],
-      });
-      await alert.present();
-    }
-    this.patients = await this.patientService.getAllPatients();
-  }
-
-  //con questa funzioen dovrebbe aggiornarsi la lista però non so come chiamarla. tramite (ionChange) sull'html non va
-  async reveicePatient(){   
-    console.log("sono su receive patient"); 
-    this.patients = await this.patientService.getAllPatients();
-    this.patients.push(this.addPatientService.getPatient());
   }
 
   async ngOnInit() {
     this.patients = await this.patientService.getAllPatients();
-    console.log(this.patients)
+    console.log(this.patients);
   }
 }

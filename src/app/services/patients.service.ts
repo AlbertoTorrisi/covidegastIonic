@@ -30,15 +30,17 @@ export class PatientsService {
     phone: string,
     hasCovid: number
   ) =>
-    this.httpClient.post(this.url, {
-      name,
-      email,
-      dob,
-      fiscal_code,
-      address,
-      phone,
-      hasCovid,
-    }).toPromise();
+    this.httpClient
+      .post(this.url, {
+        name,
+        email,
+        dob,
+        fiscal_code,
+        address,
+        phone,
+        hasCovid,
+      })
+      .toPromise();
 
   updatePatient = async (
     id: number,
@@ -50,13 +52,22 @@ export class PatientsService {
     dob: string,
     fiscal_code: string
   ) =>
-    this.httpClient.put(
-      `https://covid19-tracker-server.herokuapp.com/patients/${id}`,
-      { name, address, email, phone, hasCovid, dob, fiscal_code }
-    );
+    this.httpClient
+      .put(`https://covid19-tracker-server.herokuapp.com/patients/${id}`, {
+        name,
+        address,
+        email,
+        phone,
+        hasCovid,
+        dob,
+        fiscal_code,
+      })
+      .toPromise();
 
   deletePatient = async (id: number) =>
-    this.httpClient.delete<Patient>(
-      `https://covid19-tracker-server.herokuapp.com/patients/${id}`
-    );
+    this.httpClient
+      .delete<Patient>(
+        `https://covid19-tracker-server.herokuapp.com/patients/${id}`
+      )
+      .toPromise();
 }
