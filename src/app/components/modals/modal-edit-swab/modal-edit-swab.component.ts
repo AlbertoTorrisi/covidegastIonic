@@ -23,12 +23,13 @@ export class ModalEditSwabComponent implements OnInit {
   
   constructor(builder:FormBuilder, private modalCtrl: ModalController) {
     this.formSwab= builder.group({
-      team_id:"",
-      date:"",
-      address:"",      
-      phone:"",
-      done:this.done,
-      positive_res:this.positive_res,
+      team_id:  [,],
+      date:  [,],
+      type:  [,],
+      done:  [,],
+      positive_res:  [,],
+      phone:   [,],
+      address:   [,],  
     })
    }
 

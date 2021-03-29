@@ -1,3 +1,51 @@
-<p>
-  modal-add-swab works!
-</p>
+<ion-header mode="ios">
+  <ion-toolbar>
+      <ion-title >Program New Swab </ion-title>        
+          <ion-button size="small"  mode='ios' slot="end" (click)="dismissModal()">Chiudi</ion-button>
+      </ion-toolbar>
+</ion-header>
+<ion-content mode="ios" class="ion-padding">
+  <form [formGroup]="formSwab" mode="ios" (ngSubmit)="onSave()">
+    <ion-item>
+      <ion-label>Team</ion-label>
+      <ion-select name="team_id"  formControlName="team_id">
+        <ion-select-option value="1">Team-1</ion-select-option>
+        <ion-select-option value="2">Team-2</ion-select-option>
+        <ion-select-option value="3">Team-3</ion-select-option>        
+      </ion-select>
+    </ion-item>
+    <ion-item class="control">
+      <ion-label position="floating">Date</ion-label>
+      <ion-datetime value="2021-03-29" placeholder="" [pickerOptions]="pickerDate" formControlName="date"></ion-datetime>
+      <ion-label position="floating">Time</ion-label>
+      <ion-datetime display-format="H:m" picker-format="H:m" value="1990-02-19T07:43Z" formControlName="time"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Type</ion-label>
+      <ion-select name="type"  formControlName="type">
+        <ion-select-option value="mol">Molecular</ion-select-option>
+        <ion-select-option value="rap">Rapid</ion-select-option>
+        <ion-select-option value="sier">Sierologic</ion-select-option>        
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="control">
+      <ion-label position="floating">Patient</ion-label>
+      <ion-select name="patients"  formControlName="patients">
+        <ion-select-option value="1">Team-1</ion-select-option>
+        <ion-select-option value="2">Team-2</ion-select-option>
+        <ion-select-option value="3">Team-3</ion-select-option>        
+      </ion-select>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label>Done</ion-label>
+      <ion-checkbox  color="primary" mode='ios' name="done" [checked]="false" formControlName="done"></ion-checkbox>
+    </ion-item>
+    <ion-item >
+      <ion-label >Positive</ion-label>
+      <ion-checkbox color="primary" mode='ios' name="positive_res" [checked]="false"  formControlName="positive_res"></ion-checkbox>
+    </ion-item>
+    <ion-button  class="ion-padding" expand="block"  [disabled]="formSwab.invalid" type="submit">Save</ion-button>
+  </form>
+</ion-content>

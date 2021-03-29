@@ -86,18 +86,17 @@ export class SwabsListComponent implements OnInit {
     console.log(swabModified)
     if(role === 'saved'){
       const alert = await this.alertCtrl.create({
-      header: 'Success',
-      message: 'Saved successfly!',
-      buttons: ['Close'],
-    });
+        header: 'Success',
+        message: 'Saved successfly!',
+        buttons: ['Close'],
+      });
       await alert.present();
     }
   }
 
 
   async ngOnInit() {
-    this.swabs = await this.swabService.allSwabs();
-    
+    this.swabs = await this.swabService.allSwabs();    
     this.swabs = Object.entries(this.swabs)
      console.log(this.swabs);
     

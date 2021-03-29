@@ -14,14 +14,15 @@ export class SwabAddComponent implements OnInit {
 
   ngOnInit() {}
 
-  async openModal() {
+  async openAddSwabModal() {
     const modal = await this.modalController.create({
       component: ModalAddSwabComponent,
+     
       
     });
      await modal.present();
  
      const {data: newSwab, role} = await modal.onWillDismiss();
-
+      console.log(newSwab)
   }
 }
