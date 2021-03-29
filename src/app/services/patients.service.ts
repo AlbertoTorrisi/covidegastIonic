@@ -38,7 +38,7 @@ export class PatientsService {
       address,
       phone,
       hasCovid,
-    });
+    }).toPromise();
 
   updatePatient = async (
     id: number,

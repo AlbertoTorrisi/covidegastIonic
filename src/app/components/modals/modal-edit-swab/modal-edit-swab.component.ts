@@ -9,7 +9,6 @@ import { ModalController } from '@ionic/angular';
 })
 export class ModalEditSwabComponent implements OnInit {
 
-
   @Input() team_id:number;
   @Input() date:string;
   @Input() type:string;
@@ -18,20 +17,31 @@ export class ModalEditSwabComponent implements OnInit {
   @Input() phone:string;
   @Input() address:string;
   
-
+  str=JSON.stringify;
   formSwab: FormGroup;
   
   constructor(builder:FormBuilder, private modalCtrl: ModalController) {
     this.formSwab= builder.group({
-      team_id:  [,],
-      date:  [,],
-      type:  [,],
-      done:  [,],
-      positive_res:  [,],
-      phone:   [,],
-      address:   [,],  
+      team_id:  ["", Validators.required],
+      date:  ["", Validators.required],
+      type:  ["", Validators.required],
+      done:  ["", Validators.required],
+      positive_res:  ["", Validators.required],
+      phone:   ["", Validators.required],
+      address:   ["", Validators.required],  
     })
    }
+
+   public findInvalidControls() {
+    const invalid = [];
+    const controls = this.formSwab.controls;
+    for (const name in controls) {
+        if (controls[name].invalid) {
+            invalid.push(name);
+        }
+    }
+    return invalid;
+  }
 
   ngOnInit() {}
 
@@ -39,6 +49,6 @@ export class ModalEditSwabComponent implements OnInit {
     this.modalCtrl.dismiss(null, 'cancel')
  }
   onSave(){
-    this.modalCtrl.dismiss(this.formSwab, 'saved')
+   this.modalCtrl.dismiss(this.formSwab, 'saved')
   }
 }

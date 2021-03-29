@@ -13,8 +13,9 @@ export class ModalEditPatientComponent implements OnInit {
   @Input() address:string;
   @Input() phone:string;
   @Input() email:string;
-  @Input() positive: boolean;
+  @Input() positiveRes: boolean;
   @Input() fiscal_code:string;
+  @Input() id:number;
 
   formPatient: FormGroup;
 
@@ -23,11 +24,15 @@ export class ModalEditPatientComponent implements OnInit {
       address:["", Validators.required],
       phone:["", Validators.required],
       email:["", Validators.required],
-      positive:this.positive,
+      positiveRes:this.positiveRes,
     })
   }
 
   
+   deletePatient(){
+    this.modalCtrl.dismiss(this.id, 'deletePatient')
+    console.log(this.id)
+  }
 
 
   dismissModal=()=>{

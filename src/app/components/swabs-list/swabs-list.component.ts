@@ -73,7 +73,7 @@ export class SwabsListComponent implements OnInit {
         date:  swab.date,
         type:  swab.type,
         done:  swab.done,
-        positive_res:  swab.positive_res,
+        positiveRes:  swab.positive_res,
         name:  swab.name,
         phone:  swab.phone,
         address:  swab.address,       
@@ -92,6 +92,7 @@ export class SwabsListComponent implements OnInit {
       });
       await alert.present();
     }
+    
   }
 
 

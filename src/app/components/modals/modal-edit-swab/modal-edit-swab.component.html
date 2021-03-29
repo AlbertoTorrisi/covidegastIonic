@@ -4,7 +4,7 @@
           <ion-button size="small"  mode='ios' slot="end" (click)="dismissModal()">Chiudi</ion-button>
       </ion-toolbar>
 </ion-header>
-<ion-content mode="ios" class="ion-padding">
+<ion-content mode="ios" class="ion-padding" >
   <form [formGroup]="formSwab" mode="ios" (ngSubmit)="onSave()">
     <ion-item>
       <ion-label>Team</ion-label>
@@ -32,8 +32,9 @@
     </ion-item>
     <ion-item >
       <ion-label >Positive</ion-label>
-      <ion-checkbox color="primary" mode='ios' name="positive_res"  formControlName="positive_res"></ion-checkbox>
+      <ion-checkbox color="primary" mode='ios' name="positiveRes"  formControlName="positiveRes"></ion-checkbox>
     </ion-item>
-    <ion-button  class="ion-padding" expand="block"  [disabled]="formSwab.invalid" type="submit">Save</ion-button>
+    <p>{{str(findInvalidControls())}}</p>
+    <ion-button  class="ion-padding" expand="block"  [disabled]="formSwab.invalid" type="button" (click)="onSave()" >Save</ion-button>
   </form>
 </ion-content>

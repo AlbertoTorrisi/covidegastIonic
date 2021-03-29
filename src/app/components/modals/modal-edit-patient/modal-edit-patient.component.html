@@ -20,8 +20,10 @@
     </ion-item>
     <ion-item  >
       <ion-label>Positive</ion-label>
-      <ion-checkbox color="primary" mode='ios' name="positive"  formControlName="positive"></ion-checkbox>
+      <ion-checkbox color="primary" mode='ios' name="positiveRes"  formControlName="positiveRes"></ion-checkbox>
     </ion-item>
     <ion-button  class="ion-padding" expand="block"  [disabled]="formPatient.invalid" type="submit">Save</ion-button>
+    <ion-button class="ion-padding" slot="start" expand="block" type="button" (click)="deletePatient()">Delete</ion-button>
+
   </form>
 </ion-content>

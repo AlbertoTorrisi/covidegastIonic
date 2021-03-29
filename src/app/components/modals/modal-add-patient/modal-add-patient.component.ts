@@ -20,7 +20,7 @@ export class ModalAddPatientComponent implements OnInit {
       address:["", Validators.required],
       phone:["", Validators.required],
       email:["", Validators.required],
-      positive: false
+      hasCovid: [,]
     })
   }
 
@@ -31,7 +31,7 @@ export class ModalAddPatientComponent implements OnInit {
      this.modalCtrl.dismiss(null, 'cancel')
   }
   
-  onSave(){
-    this.modalCtrl.dismiss(this.formPatient, 'saved')
+  onAdd(){
+    this.modalCtrl.dismiss(this.formPatient, 'add')
   }
 }

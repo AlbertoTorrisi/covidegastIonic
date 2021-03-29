@@ -5,7 +5,7 @@
       </ion-toolbar>
 </ion-header>
 <ion-content mode="ios" class="ion-padding">
-  <form [formGroup]="formPatient" mode="ios" (ngSubmit)="onSave()">
+  <form [formGroup]="formPatient" mode="ios" (ngSubmit)="onAdd()">
     <ion-item class="control">
       <ion-label position="floating">Name</ion-label>
       <ion-input type="text" name="name"  formControlName="name"></ion-input>
@@ -18,10 +18,18 @@
       <ion-label position="floating">Address</ion-label>
       <ion-input type="text" name="address" formControlName="address"></ion-input>
     </ion-item>
+
     <ion-item class="control">
+      <ion-label position="floating">Date of Birth</ion-label>
+      <ion-datetime displayFormat="YYYY/MM/DD" placeholder="YYYY/MM/DD" name="dateOfBirth" formControlName="dateOfBirth"></ion-datetime>
+    </ion-item>
+    <!--
+      ion-item class="control">
       <ion-label position="floating">Date of Birth</ion-label>
       <ion-input type="date" name="dateOfBirth" placeholder=""  formControlName="dateOfBirth"></ion-input>
     </ion-item>
+    -->
+    <
     <ion-item class="control">
       <ion-label position="floating">Fiscal Code</ion-label>
       <ion-input type="text" name="fiscalCode" formControlName="fiscalCode"></ion-input>
@@ -36,7 +44,7 @@
     </ion-item>
     <ion-item class="control ion-padding-top" >
       <ion-label>Positive</ion-label>
-      <ion-checkbox color="primary" mode='ios' name="positive"  formControlName="positive"></ion-checkbox>
+      <ion-checkbox color="primary" mode='ios' name="hasCovid"  formControlName="hasCovid"></ion-checkbox>
     </ion-item>
     <ion-button  class="ion-padding" expand="block"  [disabled]="formPatient.invalid" type="submit">Save</ion-button>
   </form>
