@@ -98,7 +98,10 @@ export class SwabsListComponent implements OnInit {
 
   async ngOnInit() {
     this.swabs = await this.swabService.allSwabs();    
-    this.swabs = Object.entries(this.swabs)
+   // this.swabs = Object.entries(this.swabs)
+    if(this.swabs == null){
+      console.log("CIao")
+    }
      console.log(this.swabs);
     
   }

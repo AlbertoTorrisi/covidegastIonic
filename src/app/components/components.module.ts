@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { PatientAddComponent } from './patient-add/patient-add.component';
 import { SwabAddComponent } from './swab-add/swab-add.component';
+import { AlertsModule } from './alerts/alerts.module';
 
 
 

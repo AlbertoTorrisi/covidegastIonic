@@ -9,10 +9,11 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { AuthenticationService } from '../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(private authenticationService: AuthenticationService,private router: Router,) {}
 
   intercept(
     request: HttpRequest<any>,
@@ -25,8 +26,11 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.authenticationService.logOut();
           // location.reload();
         }
-
+        if(err.status === 404){
+          this.router.navigateByUrl("/notFound")
+        }
         const error = err.error.message || err.error.detail || err.statusText;
+        console.log(error)
         return throwError(error);
       })
     );
