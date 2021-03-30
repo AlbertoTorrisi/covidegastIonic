@@ -27,6 +27,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'notFound',
+        loadChildren: () =>
+          import('../components/alerts/alerts.module').then(
+            (m) => m.AlertsModule
+          ),
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab2',
         pathMatch: 'full',

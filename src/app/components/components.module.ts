@@ -7,6 +7,7 @@ import { SwabsListComponent } from './swabs-list/swabs-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { SwabAddComponent } from './swab-add/swab-add.component';
+import { AlertsModule } from './alerts/alerts.module';
 
 @NgModule({
   declarations: [

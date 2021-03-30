@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ComponentsModule } from './components/components.module';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { AlertsModule } from './components/alerts/alerts.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     IonicStorageModule.forRoot(),
     AppRoutingModule,
     ComponentsModule,
+    AlertsModule,
     HttpClientModule,
     
   ],
