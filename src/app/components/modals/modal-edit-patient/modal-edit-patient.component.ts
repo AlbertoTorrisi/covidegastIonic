@@ -1,5 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -10,39 +15,36 @@ import { ModalController } from '@ionic/angular';
 export class ModalEditPatientComponent implements OnInit {
   @Input() name: string;
   @Input() surname: string;
-  @Input() address:string;
-  @Input() phone:string;
-  @Input() email:string;
-  @Input() positiveRes: boolean;
-  @Input() fiscal_code:string;
-  @Input() id:number;
+  @Input() address: string;
+  @Input() phone: string;
+  @Input() email: string;
+  @Input() hasCovid: boolean;
+  @Input() fiscal_code: string;
+  @Input() id: number;
 
   formPatient: FormGroup;
 
-  constructor(builder:FormBuilder, private modalCtrl: ModalController) { 
-    this.formPatient= builder.group({
-      address:["", Validators.required],
-      phone:["", Validators.required],
-      email:["", Validators.required],
-      positiveRes:this.positiveRes,
-    })
+  constructor(builder: FormBuilder, private modalCtrl: ModalController) {
+    this.formPatient = builder.group({
+      address: [this.address, Validators.required],
+      phone: [this.phone, Validators.required],
+      email: [this.email, Validators.required],
+      hasCovid: this.hasCovid,
+    });
   }
 
-  
-   deletePatient(){
-    this.modalCtrl.dismiss(this.id, 'deletePatient')
-    console.log(this.id)
+  deletePatient() {
+    this.modalCtrl.dismiss(this.id, 'deletePatient');
+    console.log(this.id);
   }
 
+  dismissModal = () => {
+    this.modalCtrl.dismiss(null, 'cancel');
+  };
 
-  dismissModal=()=>{
-     this.modalCtrl.dismiss(null, 'cancel')
-  }
-  
-  onSave(){
-    this.modalCtrl.dismiss(this.formPatient, 'saved')
+  onSave() {
+    this.modalCtrl.dismiss(this.formPatient, 'saved');
   }
 
   ngOnInit() {}
-
 }

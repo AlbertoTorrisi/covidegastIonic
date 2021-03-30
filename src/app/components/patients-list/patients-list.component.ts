@@ -46,17 +46,17 @@ export class PatientsListComponent implements OnInit {
     if (role === 'saved') {
       const index =
         this.patients &&
-        this.patients.findIndex((patient) => patient.name === patient.name);
+        this.patients.findIndex(
+          ({ patient_id }) => patient.patient_id === patient_id
+        );
       this.patients[index].address = patientModified.value.address;
       this.patients[index].phone = patientModified.value.phone;
       this.patients[index].email = patientModified.value.email;
       if (patientModified.value.hasCovid == null) {
-        this.patients[index].hasCovid = false;
+        this.patients[index].hasCovid = 0;
       } else {
-        this.patients[index].hasCovid = patientModified.value.hasCovid;
+        this.patients[index].hasCovid = Number(patientModified.value.hasCovid);
       }
-      console.log(patientModified);
-      console.log(this.patients[index]);
       const res = await this.patientService.updatePatient(
         this.patients[index].patient_id,
         this.patients[index].name,
@@ -79,6 +79,5 @@ export class PatientsListComponent implements OnInit {
 
   async ngOnInit() {
     this.patients = await this.patientService.getAllPatients();
-    console.log(this.patients);
   }
 }

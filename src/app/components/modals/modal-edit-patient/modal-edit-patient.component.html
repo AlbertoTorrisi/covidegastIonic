@@ -1,29 +1,64 @@
 <ion-header mode="ios">
   <ion-toolbar>
-      <ion-title >{{name}} {{fiscal_code}}</ion-title>        
-          <ion-button size="small"  mode='ios' slot="end" (click)="dismissModal()">Chiudi</ion-button>
-      </ion-toolbar>
+    <ion-title>{{ name }} {{ fiscal_code }}</ion-title>
+    <ion-button size="small" mode="ios" slot="end" (click)="dismissModal()"
+      >Chiudi</ion-button
+    >
+  </ion-toolbar>
 </ion-header>
 <ion-content mode="ios" class="ion-padding">
   <form [formGroup]="formPatient" mode="ios" (ngSubmit)="onSave()">
     <ion-item class="control">
       <ion-label position="floating">Address</ion-label>
-      <ion-input type="text" name="address" [(ngModel)]="address" formControlName="address"></ion-input>
+      <ion-input
+        type="text"
+        name="address"
+        [(ngModel)]="address"
+        formControlName="address"
+      ></ion-input>
     </ion-item>
     <ion-item class="control">
       <ion-label position="floating">Phone</ion-label>
-      <ion-input type="text" name="phone" [(ngModel)]="phone" formControlName="phone"></ion-input>
+      <ion-input
+        type="text"
+        name="phone"
+        [(ngModel)]="phone"
+        formControlName="phone"
+      ></ion-input>
     </ion-item>
     <ion-item class="control">
       <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" name="email"  [(ngModel)]="email" formControlName="email"></ion-input>
+      <ion-input
+        type="text"
+        name="email"
+        [(ngModel)]="email"
+        formControlName="email"
+      ></ion-input>
     </ion-item>
-    <ion-item  >
+    <ion-item>
       <ion-label>Positive</ion-label>
-      <ion-checkbox color="primary" mode='ios' name="positiveRes"  formControlName="positiveRes"></ion-checkbox>
+      <ion-checkbox
+        color="primary"
+        mode="ios"
+        name="hasCovid"
+        formControlName="hasCovid"
+        [(ngModel)]="hasCovid"
+      ></ion-checkbox>
     </ion-item>
-    <ion-button  class="ion-padding" expand="block"  [disabled]="formPatient.invalid" type="submit">Save</ion-button>
-    <ion-button class="ion-padding" slot="start" expand="block" type="button" (click)="deletePatient()">Delete</ion-button>
-
+    <ion-button
+      class="ion-padding"
+      expand="block"
+      [disabled]="formPatient.invalid"
+      type="submit"
+      >Save</ion-button
+    >
+    <ion-button
+      class="ion-padding"
+      slot="start"
+      expand="block"
+      type="button"
+      (click)="deletePatient()"
+      >Delete</ion-button
+    >
   </form>
 </ion-content>

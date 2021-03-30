@@ -5,7 +5,12 @@
       <ion-item>
         <ion-label>
           <h2 color="primary">{{ patient.name }}</h2>
-          <p>Has Covid: {{ patient.hasCovid }}</p>
+          <p>
+            Has Covid:
+            <i
+              [ngClass]="patient.hasCovid ? 'fas fa-check' : 'fas fa-times'"
+            ></i>
+          </p>
           <p>
             <i class="fas fa-house-user"></i>{{ patient.address }}
           </p> </ion-label
