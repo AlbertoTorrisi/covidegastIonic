@@ -1,4 +1,16 @@
-<ion-content mode="ios" class="ion-padding">
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Patients List </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-button
+    mode="ios"
+    class="ion-padding"
+    (click)="openModalPatient(null, false)"
+    >Add Patient</ion-button
+  >
   <ion-list>
     <!-- <ion-item class="ion-activatable ripple-parent"> -->
     <ion-item-sliding *ngFor="let patient of patients">
@@ -26,7 +38,7 @@
             slot="start"
             name="create-outline"
             size="large"
-            (click)="openModalEditPatient(patient)"
+            (click)="openModalPatient(patient, true)"
           ></ion-icon>
           Edit
         </ion-item-option>

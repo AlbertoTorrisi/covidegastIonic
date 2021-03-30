@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Patient } from '../interface/list-of-patients';
+import { Patient } from '../interface/patient';
 import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
@@ -44,23 +44,17 @@ export class PatientsService {
 
   updatePatient = async (
     id: number,
-    name: string,
     address: string,
     email: string,
     phone: number,
-    hasCovid: number,
-    dob: string,
-    fiscal_code: string
+    hasCovid: number
   ) =>
     this.httpClient
       .put(`https://covid19-tracker-server.herokuapp.com/patients/${id}`, {
-        name,
         address,
         email,
         phone,
         hasCovid,
-        dob,
-        fiscal_code,
       })
       .toPromise();
 

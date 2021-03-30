@@ -2,25 +2,21 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab1Page } from './tab1.page';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import { PatientsTab } from './patientsTab.page';
 
-import { Tab1PageRoutingModule } from './tab1-routing.module';
+import { PatientsTabRoutingModule } from './patientsTab-routing.module';
 import { ComponentsModule } from '../components/components.module';
 import { ModalsModule } from '../components/modals/modals.module';
-
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    ExploreContainerComponentModule,
-    Tab1PageRoutingModule,
+    PatientsTabRoutingModule,
     ComponentsModule,
-    ModalsModule
-   
+    ModalsModule,
   ],
-  declarations: [Tab1Page]
+  declarations: [PatientsTab],
 })
-export class Tab1PageModule {}
+export class PatientsPageModule {}

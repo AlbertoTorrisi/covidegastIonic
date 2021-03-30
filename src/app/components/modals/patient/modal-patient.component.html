@@ -8,6 +8,11 @@
 </ion-header>
 <ion-content mode="ios" class="ion-padding">
   <form [formGroup]="formPatient" mode="ios" (ngSubmit)="onSave()">
+    <ion-item *ngIf="!this.editPatient" class="control">
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="text" name="name" formControlName="name"></ion-input>
+    </ion-item>
+
     <ion-item class="control">
       <ion-label position="floating">Address</ion-label>
       <ion-input
@@ -15,6 +20,24 @@
         name="address"
         [(ngModel)]="address"
         formControlName="address"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="!this.editPatient" class="control">
+      <ion-label position="floating">Date of Birth</ion-label>
+      <ion-datetime
+        displayFormat="YYYY/MM/DD"
+        placeholder="YYYY/MM/DD"
+        name="dob"
+        formControlName="dob"
+      ></ion-datetime>
+    </ion-item>
+    <ion-item *ngIf="!this.editPatient" class="control">
+      <ion-label position="floating">Fiscal Code</ion-label>
+      <ion-input
+        type="text"
+        name="fiscalCode"
+        formControlName="fiscalCode"
       ></ion-input>
     </ion-item>
     <ion-item class="control">
@@ -48,17 +71,9 @@
     <ion-button
       class="ion-padding"
       expand="block"
-      [disabled]="formPatient.invalid"
+      [disabled]="!editPatient && formPatient.invalid"
       type="submit"
       >Save</ion-button
-    >
-    <ion-button
-      class="ion-padding"
-      slot="start"
-      expand="block"
-      type="button"
-      (click)="deletePatient()"
-      >Delete</ion-button
     >
   </form>
 </ion-content>

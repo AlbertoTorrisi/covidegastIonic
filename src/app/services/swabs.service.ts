@@ -18,13 +18,7 @@ export class SwabsService {
     }
   };
 
-  allSwabs = () =>
-    this.httpClient
-      .get<SwabCalendar>(this.url)
-      .toPromise()
-      .catch(this.handleHttpErrors);
-
-  allSwabsByDate = (dateStart: string, dateEnd: string) =>
+  allSwabsByDate = (dateStart: any, dateEnd: any) =>
     this.httpClient
       .get<SwabCalendar>(
         `${this.url}?startDate=${dateStart}&endDate=${dateEnd}`

@@ -21,7 +21,7 @@ export class SwabsListComponent implements OnInit {
     private alertCtrl: AlertController,
     private swabService: SwabsService
   ) {}
-/*
+  /*
   async openModalEditSwab({
     swab_id,
     team_id,
@@ -63,28 +63,27 @@ export class SwabsListComponent implements OnInit {
     
   }
 */
-  
-  async openModalEditSwab(swab){
-    console.log(swab)
+
+  async openModalEditSwab(swab) {
+    console.log(swab);
     const modal = await this.modalController.create({
       component: ModalEditSwabComponent,
       componentProps: {
-        team_id:  swab.team_id,
-        date:  swab.date,
-        type:  swab.type,
-        done:  swab.done,
-        positiveRes:  swab.positive_res,
-        name:  swab.name,
-        phone:  swab.phone,
-        address:  swab.address,       
+        team_id: swab.team_id,
+        date: swab.date,
+        type: swab.type,
+        done: swab.done,
+        positiveRes: swab.positive_res,
+        name: swab.name,
+        phone: swab.phone,
+        address: swab.address,
       },
-
     });
     await modal.present();
 
     const { data: swabModified, role } = await modal.onWillDismiss();
-    console.log(swabModified)
-    if(role === 'saved'){
+    console.log(swabModified);
+    if (role === 'saved') {
       const alert = await this.alertCtrl.create({
         header: 'Success',
         message: 'Saved successfly!',
@@ -92,17 +91,18 @@ export class SwabsListComponent implements OnInit {
       });
       await alert.present();
     }
-    
   }
-
 
   async ngOnInit() {
-    this.swabs = await this.swabService.allSwabs();    
-    this.swabs = Object.entries(this.swabs)
-     console.log(this.swabs);
-    
+    const today = new Date().toDateString();
+    console.log('🚀 ~ today', today);
+
+    const tomorrow = new Date(
+      new Date().setDate(new Date().getDate() + 1)
+    ).toDateString();
+    console.log('🚀 ~ tomorrow', tomorrow);
+    this.swabs = await this.swabService.allSwabsByDate(today, tomorrow);
+    this.swabs = Object.entries(this.swabs);
+    console.log(this.swabs);
   }
-  
-
-
 }
