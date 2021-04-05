@@ -1,21 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModalAddSwabComponent } from './modal-add-swab/modal-add-swab.component';
+import { ModalSwabComponent } from './swab/modal-swab.component';
 import { ModalPatientComponent } from './patient/modal-patient.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 @NgModule({
-  declarations: [
-    ModalAddSwabComponent,
-    ModalPatientComponent,
-    ModalAddSwabComponent,
-  ],
+  declarations: [ModalPatientComponent, ModalSwabComponent],
   imports: [CommonModule, FormsModule, IonicModule, ReactiveFormsModule],
-  exports: [
-    ModalAddSwabComponent,
-    ModalPatientComponent,
-    ModalAddSwabComponent,
-  ],
+  exports: [ModalPatientComponent, ModalSwabComponent],
 })
 export class ModalsModule {}

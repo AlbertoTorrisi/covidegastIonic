@@ -1,0 +1,122 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-title>{{ date }} {{ time }}</ion-title>
+    <ion-button size="small" mode="ios" slot="end" (click)="dismissModal()"
+      >Chiudi</ion-button
+    >
+  </ion-toolbar>
+</ion-header>
+<ion-content mode="ios" class="ion-padding">
+  <form [formGroup]="formSwab" mode="ios" (ngSubmit)="onSave()">
+    <ion-item>
+      <ion-label>Team</ion-label>
+      <ion-select
+        name="team_id"
+        formControlName="team_id"
+        [(ngModel)]="team_id"
+      >
+        <ion-select-option value="1">Team-1</ion-select-option>
+        <ion-select-option value="2">Team-2</ion-select-option>
+        <ion-select-option value="3">Team-3</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="control">
+      <ion-label position="floating">Date</ion-label>
+      <ion-datetime
+        placeholder=""
+        [pickerOptions]="pickerDate"
+        formControlName="date"
+        [(ngModel)]="date"
+      ></ion-datetime>
+      <ion-label position="floating">Time</ion-label>
+      <ion-datetime
+        display-format="HH:mm"
+        picker-format="HH:mm"
+        formControlName="time"
+        [(ngModel)]="time"
+      ></ion-datetime>
+    </ion-item>
+    <ion-item class="form-group row">
+      <ion-label for="swab" class="col-sm-4 col-form-label"
+        >Swab Type</ion-label
+      >
+      <ion-select
+        formControlName="type"
+        class="form-select"
+        aria-label="swab type"
+        [(ngModel)]="type"
+      >
+        <ion-select-option value="mol">Molecular</ion-select-option>
+        <ion-select-option value="rap">Rapid</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="form-group row">
+      <ion-label for="patient" class="col-sm-4 col-form-label"
+        >Patient</ion-label
+      >
+      <ion-select
+        class="form-select"
+        aria-label="patient"
+        formControlName="patient_id"
+        [(ngModel)]="patient_id"
+        placeholder="Select a patient"
+      >
+        <ion-select-option value="" selected disabled
+          >Patient</ion-select-option
+        >
+
+        <ion-select-option
+          *ngFor="let patient of patients"
+          value="{{ patient.patient_id }}"
+        >
+          {{ patient.name }} - {{ patient.fiscal_code }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Done</ion-label>
+      <ion-checkbox
+        color="primary"
+        mode="ios"
+        name="done"
+        formControlName="done"
+        [(ngModel)]="done"
+      ></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Positive</ion-label>
+      <ion-checkbox
+        color="primary"
+        mode="ios"
+        name="positive_res"
+        formControlName="positive_res"
+        [(ngModel)]="positive_res"
+      ></ion-checkbox>
+    </ion-item>
+    <p>{{ str(findInvalidControls()) }}</p>
+    <ion-button
+      class="ion-padding"
+      expand="block"
+      [disabled]="formSwab.invalid"
+      type="button"
+      (click)="onSave()"
+      >Save</ion-button
+    >
+    <ion-button
+      class="ion-padding deleteSwab"
+      expand="block"
+      [disabled]="formSwab.invalid"
+      type="button"
+      (click)="onDelete()"
+      ><i class="fas fa-times"></i>Delete Swab</ion-button
+    >
+    <ion-button
+      class="ion-padding callPatient"
+      expand="block"
+      [disabled]="formSwab.invalid"
+      type="button"
+      (click)="onSave()"
+      ><i class="fas fa-phone"></i>Call Patient</ion-button
+    >
+  </form>
+</ion-content>

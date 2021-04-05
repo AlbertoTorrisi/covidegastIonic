@@ -1,0 +1,19 @@
+.datePicker {
+  max-width: 20vw;
+}
+div[scrollx="true"] {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  ion-item {
+    min-width: 100px;
+  }
+}
+
+div[scrollx="true"] {
+  overflow-x: auto;
+}
+
+div[scrolly="true"] {
+  overflow-y: auto;
+}

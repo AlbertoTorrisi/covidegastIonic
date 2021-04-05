@@ -5,15 +5,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ModalsModule } from '../modals/modals.module';
 import { ComponentsModule } from '../components.module';
-import { SwabAddComponent } from '../swab-add/swab-add.component';
-
-
 
 @NgModule({
-  declarations: [Alert404Component,],
+  declarations: [Alert404Component],
   imports: [
-    CommonModule, FormsModule, IonicModule, ReactiveFormsModule,ComponentsModule
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    ReactiveFormsModule,
+    ComponentsModule,
   ],
-  exports:[Alert404Component],
+  exports: [Alert404Component],
 })
-export class AlertsModule { }
+export class AlertsModule {}

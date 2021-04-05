@@ -15,9 +15,11 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'tab2',
+        path: 'swabsTab',
         loadChildren: () =>
-          import('../tab2/tab2.module').then((m) => m.Tab2PageModule),
+          import('../swabsTab/swabsTab.module').then(
+            (m) => m.SwabsTabPageModule
+          ),
       },
       {
         path: 'loginTab',
@@ -35,7 +37,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/tab2',
+        redirectTo: '/tabs/swabsTab',
         pathMatch: 'full',
       },
     ],

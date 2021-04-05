@@ -34,14 +34,16 @@ export class SwabsService {
     done: number,
     positive_res: number
   ) =>
-    this.httpClient.post(this.url, {
-      team_id,
-      date,
-      type,
-      patient_id,
-      done,
-      positive_res,
-    });
+    this.httpClient
+      .post(this.url, {
+        team_id,
+        date,
+        type,
+        patient_id,
+        done,
+        positive_res,
+      })
+      .toPromise();
   updateSwab = (
     swab_id: number,
     team_id: number,
@@ -51,14 +53,16 @@ export class SwabsService {
     done: number,
     positive_res: number
   ) =>
-    this.httpClient.put(`${this.url}/${swab_id}`, {
-      team_id,
-      date,
-      type,
-      patient_id,
-      done,
-      positive_res,
-    });
+    this.httpClient
+      .put(`${this.url}/${swab_id}`, {
+        team_id,
+        date,
+        type,
+        patient_id,
+        done,
+        positive_res,
+      })
+      .toPromise();
   deleteSwab = (swab_id: number) =>
     this.httpClient
       .delete(`${this.url}/${swab_id}`)

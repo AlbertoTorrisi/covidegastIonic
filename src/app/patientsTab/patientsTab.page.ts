@@ -17,6 +17,9 @@ export class PatientsTab implements OnInit {
     private alertCtrl: AlertController,
     private patientService: PatientsService
   ) {}
+  async ngOnInit() {
+    this.patients = await this.patientService.getAllPatients();
+  }
   async deletePatient(patientId) {
     const res = await this.patientService.deletePatient(patientId);
     this.patients
@@ -98,9 +101,5 @@ export class PatientsTab implements OnInit {
       await alert.present();
       this.patients && this.patients.push(patientModified.value);
     }
-  }
-
-  async ngOnInit() {
-    this.patients = await this.patientService.getAllPatients();
   }
 }
