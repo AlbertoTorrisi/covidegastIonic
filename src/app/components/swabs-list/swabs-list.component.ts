@@ -1,5 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChange,
+} from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
+import * as moment from 'moment';
 import { Swab, SwabCalendar } from 'src/app/interface/list-of-swabs';
 import { SwabsService } from 'src/app/services/swabs.service';
 import { ModalEditSwabComponent } from '../modals/modal-edit-swab/modal-edit-swab.component';
@@ -9,11 +16,11 @@ import { ModalEditSwabComponent } from '../modals/modal-edit-swab/modal-edit-swa
   templateUrl: './swabs-list.component.html',
   styleUrls: ['./swabs-list.component.scss'],
 })
-export class SwabsListComponent implements OnInit {
-  swabs: any;
+export class SwabsListComponent implements OnInit, OnChanges {
+  @Input() swabs: any;
   public daysSelected: string[] = [];
   public daysSelectedContent: any[] = [];
-
+  @Input() daysPicker: string[];
   swabToUpdate: Swab;
 
   constructor(
@@ -93,7 +100,34 @@ export class SwabsListComponent implements OnInit {
     }
   }
 
+  async ngOnChanges() {
+    // prende le date per il searchByDate !NON FUNGE, o meglio chiama l'onchange insieme all'oninit
+    console.log('changed?');
+    if (this.swabs) {
+      this.swabs = await this.swabService.allSwabsByDate(
+        this.daysPicker[0],
+        this.daysPicker[1]
+      );
+      this.swabs = Object.entries(this.swabs);
+      console.log(this.swabs);
+      console.log("sono dentro l'if");
+    }
+  }
+
   async ngOnInit() {
+    //all'onInit fa visualizzare tutti gli swabs da ora fino a +7gg
+    var now = moment();
+    var nowFormatted = moment(now).format('YYYY-MM-DD');
+    var endFormatted = moment(now).add(7, 'days').format('YYYY-MM-DD');
+    // console.log('Formatted', nowFormatted);
+    //console.log('endFormatted', endFormatted);
+    this.swabs = await this.swabService.allSwabsByDate(
+      nowFormatted,
+      endFormatted
+    );
+    this.swabs = Object.entries(this.swabs);
+    /*
+    
     const today = new Date().toDateString();
     console.log('🚀 ~ today', today);
 
@@ -103,6 +137,6 @@ export class SwabsListComponent implements OnInit {
     console.log('🚀 ~ tomorrow', tomorrow);
     this.swabs = await this.swabService.allSwabsByDate(today, tomorrow);
     this.swabs = Object.entries(this.swabs);
-    console.log(this.swabs);
+    console.log(this.swabs);*/
   }
 }
