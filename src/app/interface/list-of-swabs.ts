@@ -2,7 +2,7 @@ export interface Swab {
   swab_id: number;
   team_id: number;
   date: string;
-  type: 'rap' | 'sier' | 'mol';
+  type: 'rap' | 'mol';
   done: boolean;
   positive_res: boolean;
   name: string;

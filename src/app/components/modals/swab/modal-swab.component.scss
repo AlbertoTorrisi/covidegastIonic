@@ -1,0 +1,17 @@
+.callPatient {
+  min-height: 100px;
+  padding: "10%";
+  background-color: #00ff227a;
+}
+.deleteSwab {
+  min-height: 100px;
+  padding: "10%";
+  background-color: #ff08007a;
+}
+.callPatient,
+.deleteSwab {
+  button {
+    background-color: transparent;
+    border: transparent;
+  }
+}

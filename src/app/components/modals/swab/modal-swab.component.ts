@@ -12,10 +12,10 @@ import { Patient } from 'src/app/interface/patient';
 export class ModalSwabComponent implements OnInit {
   @Input() type?: string;
   @Input() date?: string;
-  @Input() team_id?: string;
+  @Input() team_id?: number;
   @Input() done?: string;
   @Input() positive_res?: string;
-  @Input() patient_id?: string;
+  @Input() patient_id?: number;
   @Input() time?: string;
   @Input() patients: Patient[];
   formSwab: FormGroup;
@@ -26,8 +26,8 @@ export class ModalSwabComponent implements OnInit {
       date: [this.date, Validators.required],
       time: [this.time, Validators.required],
       type: [this.type, Validators.required],
-      done: [this.done, Validators.required],
-      positive_res: [this.positive_res, Validators.required],
+      done: this.done,
+      positive_res: this.positive_res,
       patient_id: [this.patient_id, Validators.required],
     });
   }

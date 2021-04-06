@@ -3,39 +3,34 @@
     <ion-toolbar>
       <ion-title> Swabs Programming </ion-title>
     </ion-toolbar>
+    <ion-item-group>
+      <ion-item class="datePicker">
+        <ion-label>Start Date</ion-label>
+        <ion-datetime
+          value="1990-02-19"
+          placeholder="Start"
+          [(ngModel)]="startDate"
+        ></ion-datetime>
+        <ion-label>Ends Date</ion-label>
+        <ion-datetime
+          value="1990-02-20"
+          placeholder="End"
+          [(ngModel)]="endDate"
+          (ionChange)="searchByDate()"
+        ></ion-datetime>
+      </ion-item>
+      <label *ngIf="errorDateBefore"
+        >La data di fine è precedente alla data di inizio</label
+      >
+      <ion-button
+        mode="ios"
+        class="ion-padding"
+        (click)="openModalSwab(null, false)"
+        >Add Swab</ion-button
+      >
+    </ion-item-group>
   </ion-header>
 
-  <ion-item class="datePicker">
-    <ion-label>Start Date</ion-label>
-    <ion-datetime
-      value="1990-02-19"
-      placeholder="Select Date"
-      [(ngModel)]="startDate"
-    ></ion-datetime>
-  </ion-item>
-  <ion-item class="datePicker">
-    <ion-label>Ends Date</ion-label>
-    <ion-datetime
-      value="1990-02-20"
-      placeholder="Select Date"
-      [(ngModel)]="endDate"
-      (ionChange)="searchByDate()"
-    ></ion-datetime>
-  </ion-item>
-  <label *ngIf="errorDateBefore"
-    >La data di fine è precedente alla data di inizio</label
-  >
-  start {{startDate}} ----end{{endDate}}
-
-  <ion-button
-    mode="ios"
-    class="ion-padding"
-    (click)="openModalSwab(null, false)"
-    >Add Swab</ion-button
-  >
-  <ion-item>
-    <p (ionChange)="ngOnChanges()"></p>
-  </ion-item>
   <ion-content class="ion-margin">
     <ion-row *ngFor="let day of daysSelected">
       <ion-label>{{ day }}</ion-label>
@@ -45,12 +40,7 @@
         <ion-slide
           *ngFor="let swab of swabs[day]"
           (click)="openModalSwab(swab, true)"
-          style="
-            display: flex;
-            flex-direction: column;
-            max-width: 150px;
-            border: 2px solid #f8f8f8;
-          "
+          class="swabCard team{{swab.team_id}}"
         >
           <ion-label>
             <p><i class="fas fa-clock"></i>{{swab.date.substring(10, 16)}}</p>
@@ -60,9 +50,21 @@
           </ion-label>
 
           <ion-label>
-            {{swab.done}} {{swab.name}}
+            <p>
+              Done :
+              <i
+                [ngClass]="[
+                      swab.done ? 'far fa-check-circle' : 'fas fa-times'
+                    ]"
+              ></i>
+            </p>
+            <p>{{swab.name}}</p>
             <p><i class="fas fa-phone"></i>{{ swab.phone }}</p>
-            {{swab.positive_res}} {{swab.type}}
+            <i
+              [ngClass]="[
+              swab.type === 'rap' ? 'fas fa-registered' : 'fas fa-vial'
+            ]"
+            ></i>
           </ion-label>
         </ion-slide>
       </ion-slides>

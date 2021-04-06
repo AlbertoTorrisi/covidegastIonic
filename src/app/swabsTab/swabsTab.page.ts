@@ -21,16 +21,13 @@ import { Patient } from '../interface/patient';
   styleUrls: ['swabsTab.page.scss'],
 })
 export class SwabsTabPage {
-  @Input() daysPicker: string[];
   swabs: any;
   patients: Patient[];
   startDate: string;
   endDate: string;
   swabToUpdate: Swab;
   errorDateBefore = false;
-  searchDaysArr = [];
   public daysSelected: string[] = [];
-  public daysSelectedContent: any[] = [];
 
   constructor(
     public modalController: ModalController,
@@ -43,15 +40,16 @@ export class SwabsTabPage {
     this.patients = await this.patientsService.getAllPatients();
     this.daysSelected = Object.keys(this.swabs);
   }
-  searchByDate(event) {
+  async searchByDate() {
     let searchStart = this.startDate.substring(0, 10);
     let searchEnd = this.endDate.substring(0, 10);
-    if (!moment(this.endDate).isBefore(this.startDate)) {
-      this.errorDateBefore = false;
-      this.searchDaysArr.length = 0;
-      this.searchDaysArr.push(searchStart, searchEnd);
-    } else {
-      this.errorDateBefore = true;
+    this.errorDateBefore = moment(this.endDate).isBefore(this.startDate);
+    if (!this.errorDateBefore) {
+      this.swabs = await this.swabService.allSwabsByDate(
+        searchStart,
+        searchEnd
+      );
+      this.daysSelected = Object.keys(this.swabs);
     }
   }
 
@@ -72,37 +70,65 @@ export class SwabsTabPage {
     await modal.present();
 
     const { data: swabModified, role } = await modal.onWillDismiss();
-    console.log(swab);
     if (role === 'saved') {
       const alert = await this.alertController.create({
         header: 'Success',
         message: 'Saved successfly!',
         buttons: ['Close'],
       });
-      console.log(swabModified.value);
+      let dateToPush = editSwab
+        ? swabModified.value.date +
+          ' ' +
+          swabModified.value.time.substring(0, 5)
+        : swabModified.value.date.split('T')[0] +
+          ' ' +
+          swabModified.value.time.split('T')[1].substring(0, 5);
+      const swabFinal: [any, string, string, string, number, number] = [
+        swabModified.value.team_id,
+        dateToPush,
+        swabModified.value.type,
+        swabModified.value.patient_id,
+        Number(swabModified.value.done),
+        Number(swabModified.value.positive_res),
+      ];
       const res = editSwab
-        ? this.swabService.updateSwab(
-            swab.swab_id,
-            swabModified.value.team_id,
-            swabModified.value.date +
-              ' ' +
-              swabModified.value.time.substring(0, 5),
-            swabModified.value.type,
-            swabModified.value.patient_id,
-            Number(swabModified.value.done),
-            Number(swabModified.value.positive_res)
-          )
-        : this.swabService.addSwab(
-            swabModified.value.team_id,
-            swabModified.value.date.split('T')[0] +
-              ' ' +
-              swabModified.value.time.split('T')[1].substring(0, 5),
-            swabModified.value.type,
-            swabModified.value.patient_id,
-            Number(swabModified.value.done),
-            Number(swabModified.value.positive_res)
-          );
+        ? this.swabService.updateSwab(swab.swab_id, ...swabFinal)
+        : this.swabService.addSwab(...swabFinal);
       res && (await alert.present());
+      dateToPush = dateToPush.substring(0, 10);
+
+      const index =
+        editSwab &&
+        this.swabs[dateToPush].findIndex(
+          ({ swab_id }) => swab.swab_id === swab_id
+        );
+      const patientInfo = this.patients.find(
+        (patient) => patient.patient_id == Number(swabFinal[3])
+      );
+      editSwab
+        ? (this.swabs[dateToPush][index] = {
+            swab_id: swab.swab_id,
+            team_id: swabFinal[0],
+            date: swabFinal[1],
+            type: swabFinal[2],
+            done: swabFinal[4],
+            positive_res: swabFinal[5],
+            address: patientInfo.address,
+            phone: patientInfo.phone,
+            name: patientInfo.name,
+          })
+        : this.swabs[dateToPush] &&
+          this.swabs[dateToPush].push({
+            ...swabFinal,
+            team_id: swabFinal[0],
+            date: swabFinal[1],
+            type: swabFinal[2],
+            done: swabFinal[4],
+            positive_res: swabFinal[5],
+            address: patientInfo.address,
+            phone: patientInfo.phone,
+            name: patientInfo.name,
+          });
     } else if (role === 'delete') {
       const alert = await this.alertController.create({
         header: 'Warning',
@@ -124,17 +150,6 @@ export class SwabsTabPage {
       });
 
       await alert.present();
-    }
-  }
-
-  async ngOnChanges() {
-    // prende le date per il searchByDate !NON FUNGE, o meglio chiama l'onchange insieme all'oninit
-    if (this.swabs) {
-      this.swabs = await this.swabService.allSwabsByDate(
-        this.daysPicker[0],
-        this.daysPicker[1]
-      );
-      this.swabs = Object.entries(this.swabs);
     }
   }
 }

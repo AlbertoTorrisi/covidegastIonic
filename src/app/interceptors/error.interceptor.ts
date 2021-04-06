@@ -13,7 +13,10 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private authenticationService: AuthenticationService,private router: Router,) {}
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router
+  ) {}
 
   intercept(
     request: HttpRequest<any>,
@@ -24,13 +27,13 @@ export class ErrorInterceptor implements HttpInterceptor {
         console.log(err);
         if (err.status === 401) {
           this.authenticationService.logOut();
-          // location.reload();
+          this.router.navigate['/login'];
         }
-        if(err.status === 404){
-          this.router.navigateByUrl("/notFound")
+        if (err.status === 404) {
+          this.router.navigateByUrl('/notFound');
         }
         const error = err.error.message || err.error.detail || err.statusText;
-        console.log(error)
+        console.log(error);
         return throwError(error);
       })
     );

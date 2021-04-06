@@ -8,16 +8,17 @@
 </ion-header>
 <ion-content mode="ios" class="ion-padding">
   <form [formGroup]="formSwab" mode="ios" (ngSubmit)="onSave()">
-    <ion-item>
-      <ion-label>Team</ion-label>
+    <ion-item class="form-group row">
+      <ion-label for="team_id">Team</ion-label>
       <ion-select
-        name="team_id"
         formControlName="team_id"
+        class="form-select"
+        aria-label="team_id"
         [(ngModel)]="team_id"
       >
-        <ion-select-option value="1">Team-1</ion-select-option>
-        <ion-select-option value="2">Team-2</ion-select-option>
-        <ion-select-option value="3">Team-3</ion-select-option>
+        <ion-select-option value="1">Sambataro - Carciotto</ion-select-option>
+        <ion-select-option value="2">Del Pozzo - Montorsi</ion-select-option>
+        <ion-select-option value="3">Mangione - Serra</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item class="control">
@@ -56,15 +57,11 @@
       >
       <ion-select
         class="form-select"
-        aria-label="patient"
+        aria-label="patient_id"
         formControlName="patient_id"
         [(ngModel)]="patient_id"
         placeholder="Select a patient"
       >
-        <ion-select-option value="" selected disabled
-          >Patient</ion-select-option
-        >
-
         <ion-select-option
           *ngFor="let patient of patients"
           value="{{ patient.patient_id }}"
@@ -104,18 +101,18 @@
     >
     <ion-button
       class="ion-padding deleteSwab"
-      expand="block"
+      fill="clear"
       [disabled]="formSwab.invalid"
       type="button"
       (click)="onDelete()"
       ><i class="fas fa-times"></i>Delete Swab</ion-button
     >
     <ion-button
+      fill="clear"
       class="ion-padding callPatient"
-      expand="block"
       [disabled]="formSwab.invalid"
       type="button"
-      (click)="onSave()"
+      href="tel: {{ phone }}"
       ><i class="fas fa-phone"></i>Call Patient</ion-button
     >
   </form>

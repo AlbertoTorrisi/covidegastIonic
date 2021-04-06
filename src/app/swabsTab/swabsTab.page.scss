@@ -1,5 +1,6 @@
 .datePicker {
-  max-width: 20vw;
+  padding: 1%;
+  border: 1px solid #00000052;
 }
 div[scrollx="true"] {
   display: flex;
@@ -16,4 +17,21 @@ div[scrollx="true"] {
 
 div[scrolly="true"] {
   overflow-y: auto;
+}
+
+.swabCard {
+  display: flex;
+  flex-direction: column;
+  max-width: 150px;
+  border: 2px solid #f8f8f8;
+  box-shadow: 1px 1px 1px 10px #00000052;
+}
+.team1 {
+  background-color: #bd212179;
+}
+.team2 {
+  background-color: #2ebd215d;
+}
+.team3 {
+  background-color: #babd2169;
 }
