@@ -9,8 +9,23 @@
 <ion-content mode="ios" class="ion-padding">
   <form [formGroup]="formPatient" mode="ios" (ngSubmit)="onSave()">
     <ion-item *ngIf="!this.editPatient" class="control">
-      <ion-label position="floating">Name</ion-label>
-      <ion-input type="text" name="name" formControlName="name"></ion-input>
+      <ion-label position="floating">Name </ion-label>
+      <ion-input
+        type="text"
+        name="name"
+        formControlName="name"
+        (ionBlur)="blurInput('name')"
+        (ionChange)="blurInput('name')"
+      ></ion-input>
+      <div style="height: 20px">
+        <ion-label
+          position="stacked"
+          class="ion-label-error"
+          *ngIf="blurName && formPatient.controls['name'].hasError('required')"
+          color="danger"
+          >Il nome è obbligatorio</ion-label
+        >
+      </div>
     </ion-item>
 
     <ion-item class="control">
@@ -20,17 +35,41 @@
         name="address"
         [(ngModel)]="address"
         formControlName="address"
+        (ionBlur)="blurInput('address')"
+        (ionChange)="blurInput('address')"
       ></ion-input>
+      <div style="height: 20px">
+        <ion-label
+          class="ion-label-error"
+          position="stacked"
+          color="danger"
+          *ngIf="
+            blurAddress && formPatient.controls['address'].hasError('required')
+          "
+          >L'indirizzo è obbligatorio</ion-label
+        >
+      </div>
     </ion-item>
 
     <ion-item *ngIf="!this.editPatient" class="control">
-      <ion-label position="floating">Date of Birth</ion-label>
+      <ion-label position="floating">Date of Birth- </ion-label>
       <ion-datetime
         displayFormat="YYYY/MM/DD"
         placeholder="YYYY/MM/DD"
         name="dob"
         formControlName="dob"
+        (ionBlur)="blurInput('dob')"
+        (ionChange)="blurInput('dob')"
       ></ion-datetime>
+      <div style="height: 20px">
+        <ion-label
+          class="ion-label-error"
+          *ngIf="blurDob && formPatient.controls['dob'].hasError('required')"
+          position="stacked"
+          color="danger"
+          >La Data di Nascita è obbligatoria</ion-label
+        >
+      </div>
     </ion-item>
     <ion-item *ngIf="!this.editPatient" class="control">
       <ion-label position="floating">Fiscal Code</ion-label>
@@ -38,8 +77,25 @@
         type="text"
         name="fiscalCode"
         formControlName="fiscalCode"
+        (ionBlur)="blurInput('fiscalCode')"
+        (ionChange)="blurInput('fiscalCode')"
       ></ion-input>
+      <div style="height: 20px">
+        <ion-label
+          class="ion-label-error"
+          position="stacked"
+          *ngIf="
+            (blurFiscalCode &&
+              formPatient.controls['fiscalCode'].hasError('required')) ||
+            formPatient.controls['fiscalCode'].hasError('pattern')
+          "
+          position="floating"
+          color="danger"
+          >Inserire un codice fiscale italiano valido</ion-label
+        >
+      </div>
     </ion-item>
+
     <ion-item class="control">
       <ion-label position="floating">Phone</ion-label>
       <ion-input
@@ -47,8 +103,23 @@
         name="phone"
         [(ngModel)]="phone"
         formControlName="phone"
+        (ionBlur)="blurInput('phone')"
+        (ionChange)="blurInput('phone')"
       ></ion-input>
+      <div style="height: 20px">
+        <ion-label
+          position="stacked"
+          class="ion-label-error"
+          *ngIf="
+            (blurPhone && formPatient.controls['phone'].hasError('required')) ||
+            formPatient.controls['phone'].hasError('pattern')
+          "
+          color="danger"
+          >Inserire un numero di telefono valido</ion-label
+        >
+      </div>
     </ion-item>
+
     <ion-item class="control">
       <ion-label position="floating">Email</ion-label>
       <ion-input
@@ -56,8 +127,23 @@
         name="email"
         [(ngModel)]="email"
         formControlName="email"
+        (ionBlur)="blurInput('email')"
+        (ionChange)="blurInput('email')"
       ></ion-input>
+      <div style="height: 20px">
+        <ion-label
+          position="stacked"
+          class="ion-label-error"
+          *ngIf="
+            (blurEmail && formPatient.controls['email'].hasError('required')) ||
+            formPatient.controls['email'].hasError('email')
+          "
+          color="danger"
+          >Inserire un email valida</ion-label
+        >
+      </div>
     </ion-item>
+
     <ion-item>
       <ion-label>Positive</ion-label>
       <ion-checkbox

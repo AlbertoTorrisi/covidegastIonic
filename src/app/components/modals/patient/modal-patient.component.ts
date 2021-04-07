@@ -21,6 +21,13 @@ export class ModalPatientComponent implements OnInit {
   @Input() dob?: string;
   @Input() hasCovid?: boolean;
   @Input() editPatient: boolean;
+  blurName: boolean;
+  blurAddress: boolean;
+  blurDob: boolean;
+  blurEmail: boolean;
+  blurPhone: boolean;
+  blurFiscalCode: boolean;
+
   formPatient: FormGroup;
 
   constructor(builder: FormBuilder, private modalCtrl: ModalController) {
@@ -29,20 +36,50 @@ export class ModalPatientComponent implements OnInit {
         ? {
             address: [this.address, Validators.required],
             phone: [this.phone, Validators.required],
-            email: [this.email, Validators.required],
+            email: [
+              this.email,
+              Validators.compose([Validators.required, Validators.email]),
+            ],
             hasCovid: this.hasCovid,
           }
         : {
-            name: [this.name, Validators.required],
-            fiscalCode: [this.fiscalCode, Validators.required],
+            name: [
+              this.name,
+              Validators.compose([
+                Validators.required,
+                Validators.minLength(4),
+              ]),
+            ],
+            fiscalCode: [
+              this.fiscalCode,
+              Validators.compose([
+                Validators.required,
+                Validators.pattern(
+                  '^[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9]{3}[A-Za-z]{1}$'
+                ),
+              ]),
+            ],
             address: [this.address, Validators.required],
             dob: [this.dob, Validators.required],
             phone: [this.phone, Validators.required],
-            email: [this.email, Validators.required],
+            email: [
+              this.email,
+              Validators.compose([Validators.required, Validators.email]),
+            ],
             hasCovid: this.hasCovid,
           }
     );
   }
+
+  blurInput = (formName) => {
+    console.log('lbur');
+    if (formName === 'name') this.blurName = true;
+    if (formName === 'address') this.blurAddress = true;
+    if (formName === 'dob') this.blurDob = true;
+    if (formName === 'email') this.blurEmail = true;
+    if (formName === 'fiscalCode') this.blurFiscalCode = true;
+    if (formName === 'phone') this.blurPhone = true;
+  };
 
   dismissModal = () => {
     this.modalCtrl.dismiss(null, 'cancel');
