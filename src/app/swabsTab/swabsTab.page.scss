@@ -18,13 +18,23 @@ div[scrollx="true"] {
 div[scrolly="true"] {
   overflow-y: auto;
 }
-
-.swabCard {
+ion-row {
   display: flex;
   flex-direction: column;
-  max-width: 150px;
+}
+ion-row ion-slides {
+  display: flex;
+  justify-content: flex-start;
+}
+.swiper-container {
+  margin: 0;
+}
+.swabCard {
+  display: flex;
+  width: 40vw !important;
+  height: 40vw !important;
+  flex-direction: column;
   border: 2px solid #f8f8f8;
-  box-shadow: 1px 1px 1px 10px #00000052;
 }
 .team1 {
   background-color: #bd212179;

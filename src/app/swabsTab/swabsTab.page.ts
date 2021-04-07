@@ -54,9 +54,11 @@ export class SwabsTabPage {
   }
 
   async openModalSwab(swab, editSwab) {
+    console.log(swab);
     const modal = await this.modalController.create({
       component: ModalSwabComponent,
       componentProps: {
+        editSwab,
         type: swab?.type,
         date: swab?.date.split(' ')[0],
         time: swab?.date.split(' ')[1],
@@ -65,6 +67,7 @@ export class SwabsTabPage {
         positive_res: swab?.positive_res,
         done: swab?.done,
         patients: this.patients,
+        phone: swab?.phone,
       },
     });
     await modal.present();
@@ -113,6 +116,7 @@ export class SwabsTabPage {
             type: swabFinal[2],
             done: swabFinal[4],
             positive_res: swabFinal[5],
+            patient_id: patientInfo.patient_id,
             address: patientInfo.address,
             phone: patientInfo.phone,
             name: patientInfo.name,

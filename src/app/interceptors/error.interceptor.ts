@@ -27,7 +27,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         console.log(err);
         if (err.status === 401) {
           this.authenticationService.logOut();
-          this.router.navigate['/login'];
+          this.router.navigateByUrl('/login');
         }
         if (err.status === 404) {
           this.router.navigateByUrl('/notFound');

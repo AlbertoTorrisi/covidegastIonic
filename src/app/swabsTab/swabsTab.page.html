@@ -35,7 +35,7 @@
     <ion-row *ngFor="let day of daysSelected">
       <ion-label>{{ day }}</ion-label>
       <ion-slides
-        [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }"
+        [options]="{ slidesPerView: '2', zoom: false, grabCursor: true }"
       >
         <ion-slide
           *ngFor="let swab of swabs[day]"

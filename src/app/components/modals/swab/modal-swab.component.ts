@@ -19,6 +19,11 @@ export class ModalSwabComponent implements OnInit {
   @Input() time?: string;
   @Input() patients: Patient[];
   formSwab: FormGroup;
+  @Input() phone: string;
+  @Input() editSwab: boolean;
+  filter: string;
+  hidePatientList: boolean = false;
+  patient_name: string = '';
   str = JSON.stringify;
   constructor(builder: FormBuilder, private modalCtrl: ModalController) {
     this.formSwab = builder.group({
@@ -43,7 +48,28 @@ export class ModalSwabComponent implements OnInit {
     return invalid;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.editSwab && this.selectPatientID(this.patient_id);
+  }
+  handleSearch(e) {
+    this.filter = e.target.value;
+  }
+  selectPatientID(id) {
+    this.patient_id = id;
+    this.patient_name = this.patients.find(
+      ({ patient_id }) => patient_id === id
+    ).name;
+    this.hidePatientList = true;
+  }
+  hidePatients() {
+    this.hidePatientList = true;
+  }
+  showPatients() {
+    this.hidePatientList = false;
+  }
+  filterPatient = (patient) =>
+    patient.name.toLowerCase().indexOf(this.filter?.toLowerCase()) > -1 ||
+    patient.fiscal_code.indexOf(this.filter?.toUpperCase()) > -1;
 
   dismissModal = () => {
     this.modalCtrl.dismiss(null, 'cancel');
