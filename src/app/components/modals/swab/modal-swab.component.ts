@@ -73,7 +73,7 @@ export class ModalSwabComponent implements OnInit {
     this.patient_id = id;
     this.patient_name = this.patients.find(
       ({ patient_id }) => patient_id === id
-    ).name;
+    )?.name;
     this.hidePatientList = true;
   }
   hidePatients() {

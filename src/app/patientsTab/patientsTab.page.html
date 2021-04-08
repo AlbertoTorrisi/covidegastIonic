@@ -32,14 +32,9 @@
           <p><i class="fas fa-birthday-cake"></i> {{ patient.dob }}</p>
         </ion-label>
       </ion-item>
-      <ion-item-options>
+      <ion-item-options (click)="openModalPatient(patient, true)">
         <ion-item-option color="success">
-          <ion-icon 
-            slot="start"
-            name="create-outline"
-            size="large"
-            (click)="openModalPatient(patient, true)"
-          ></ion-icon>
+          <ion-icon slot="start" name="create-outline" size="large"></ion-icon>
           Edit
         </ion-item-option>
         <ion-item-option color="danger">

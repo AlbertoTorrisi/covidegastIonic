@@ -76,7 +76,6 @@ export class PatientsTab implements OnInit {
     }
     if (role === 'add') {
       patientModified.value.dob = patientModified.value.dob.substring(0, 10);
-
       const res = await this.patientService.addPatient(
         patientModified.value.name,
         patientModified.value.email,

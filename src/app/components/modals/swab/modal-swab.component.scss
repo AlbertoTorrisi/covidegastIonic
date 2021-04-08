@@ -7,12 +7,24 @@
   min-width: 50%;
   border-radius: 10px;
   background-color: #2dd36f;
+  display: flex;
+  flex-direction: column;
+  .fa-phone{
+    font-size: 3em !important;
+    color: #f2f2f2;
+  }
 }
 .deleteSwab {
   min-height: 100px;
   min-width: 50%;
   border-radius: 10px;
   background-color: #ff08007a;
+  display: flex;
+  flex-direction: column;
+  .fa-times{
+    font-size: 3em !important;
+    color: #f2f2f2;
+  }
 }
 
 .ion-label-error {
