@@ -5,15 +5,24 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <ion-button style="--background:#69ca62;--background-focused:#69ca62; 
-  --background-hover:#69ca62; --background-activated:#69ca62; padding: 5px;"
+  <ion-button
+    style="
+      --background: #69ca62;
+      --background-focused: #69ca62;
+      --background-hover: #69ca62;
+      --background-activated: #69ca62;
+      padding: 5px;
+    "
     mode="ios"
     (click)="openModalPatient(null, false)"
     >Add Patient</ion-button
   >
   <ion-list>
     <!-- <ion-item class="ion-activatable ripple-parent"> -->
-    <ion-item-sliding *ngFor="let patient of patients">
+    <ion-item-sliding
+      *ngFor="let patient of patients"
+      style="--border-radius: 10px"
+    >
       <ion-item>
         <ion-label>
           <h2 color="primary">{{ patient.name }}</h2>

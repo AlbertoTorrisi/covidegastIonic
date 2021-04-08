@@ -1,24 +1,23 @@
 .datePicker {
   padding: 1%;
 }
-.dateLabel{
+.dateLabel {
   border-radius: 3px;
   background-color: #eb445a;
   padding: 0px 10px;
   color: #f2f2f2;
   font-weight: bolder;
-  
 }
-.swab_date{
+.swab_date {
   font-size: 2.5em;
   font-weight: bolder;
-  color: #11111069 ;
+  color: #11111069;
 }
-.fa-times{
+.fa-times {
   font-size: 1.5em;
   color: #eb445a;
 }
-.fa-check-circle{
+.fa-check-circle {
   font-size: 1.5em;
   color: #44eb44;
 }
@@ -28,27 +27,24 @@ ion-row {
 ion-row ion-slides {
   display: flex;
   justify-content: flex-start;
-
 }
-.todayList{
-
+.todayList {
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
-.swiper-wrapper{
+.swiper-wrapper {
   justify-content: center;
   align-items: center;
 
-  .swabCard{
+  .swabCard {
     width: 60vw !important;
-    height: 60vw !important;  
-    font-size: 1.5em;   
+    height: 60vw !important;
+    font-size: 1.5em;
   }
 }
 .swiper-container {
   margin: 0;
-  
 }
 .swabCard {
   display: flex;
@@ -58,13 +54,13 @@ ion-row ion-slides {
   border: 2px solid #f8f8f8;
 }
 .team1 {
-  background-color: #bd212179;
+  background-color: rgb(130 129 129 / 14%);
 }
 .team2 {
   background-color: #2ebd215d;
 }
 .team3 {
-  background-color: #babd2169;
+  background-color: #d4d81d69;
 }
 img {
   max-width: 100%;
