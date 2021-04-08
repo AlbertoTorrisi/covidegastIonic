@@ -1,5 +1,6 @@
 <ion-content [fullscreen]="true">
   <ion-header>
+    <img src="../assets/logo-covidegast.jpg">
     <ion-toolbar>
       <ion-title> Swabs Programming </ion-title>
     </ion-toolbar>
@@ -22,9 +23,9 @@
       <label *ngIf="errorDateBefore"
         >La data di fine è precedente alla data di inizio</label
       >
-      <ion-button
+      <ion-button style="--background:#eb445a; padding: 5px;"
         mode="ios"
-        class="ion-padding"
+        
         (click)="openModalSwab(null, false)"
         >Add Swab</ion-button
       >

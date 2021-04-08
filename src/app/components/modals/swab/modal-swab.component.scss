@@ -1,20 +1,20 @@
+.button-modal{
+  display: flex;
+  justify-content:space-between;
+}
 .callPatient {
   min-height: 100px;
-  padding: "10%";
-  background-color: #00ff227a;
+  min-width: 50%;
+  border-radius: 10px;
+  background-color: #2dd36f;
 }
 .deleteSwab {
   min-height: 100px;
-  padding: "10%";
+  min-width: 50%;
+  border-radius: 10px;
   background-color: #ff08007a;
 }
-.callPatient,
-.deleteSwab {
-  button {
-    background-color: transparent;
-    border: transparent;
-  }
-}
+
 // .show {
 //   display: block;
 // }

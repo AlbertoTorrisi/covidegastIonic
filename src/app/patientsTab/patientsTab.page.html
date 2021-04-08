@@ -1,13 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <img src="../assets/logo-covidegast.jpg">
     <ion-title> Patients List </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <ion-button
+  <ion-button style="--background:#eb445a; padding: 5px;"
     mode="ios"
-    class="ion-padding"
     (click)="openModalPatient(null, false)"
     >Add Patient</ion-button
   >
@@ -33,8 +33,8 @@
         </ion-label>
       </ion-item>
       <ion-item-options>
-        <ion-item-option color="primary">
-          <ion-icon
+        <ion-item-option color="success">
+          <ion-icon 
             slot="start"
             name="create-outline"
             size="large"

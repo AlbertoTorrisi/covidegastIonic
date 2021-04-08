@@ -1,6 +1,5 @@
 .datePicker {
   padding: 1%;
-  border: 1px solid #00000052;
 }
 div[scrollx="true"] {
   display: flex;
@@ -44,4 +43,10 @@ ion-row ion-slides {
 }
 .team3 {
   background-color: #babd2169;
+}
+img {
+  max-width: 100%;
+  border: 0;
+  width: 150px;
+  margin: 0 10px auto;
 }

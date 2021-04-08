@@ -26,7 +26,7 @@
     {{ patient.name }} - {{ patient.fiscal_code }}
   </ion-item>
 </ion-list>
-<ion-content mode="ios" class="ion-padding">
+<ion-content mode="ios" class="ion-padding" style="display: flex; justify-content: center;">
   <form [formGroup]="formSwab" mode="ios" (ngSubmit)="onSave()">
     <ion-item class="form-group row">
       <ion-label for="team_id">Team</ion-label>
@@ -98,6 +98,7 @@
         formControlName="done"
         [(ngModel)]="done"
       ></ion-checkbox>
+      
     </ion-item>
     <ion-item>
       <ion-label>Positive</ion-label>
@@ -119,6 +120,8 @@
       >Save</ion-button
     >
   </form>
+
+  <div class="button-modal">
   <ion-button
     *ngIf="editSwab"
     class="ion-padding deleteSwab"
@@ -137,4 +140,5 @@
     href="tel: {{ phone }}"
     ><i class="fas fa-phone"></i>Call Patient</ion-button
   >
+  </div>
 </ion-content>
