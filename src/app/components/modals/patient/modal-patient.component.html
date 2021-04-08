@@ -79,6 +79,7 @@
         formControlName="fiscalCode"
         (ionBlur)="blurInput('fiscalCode')"
         (ionChange)="blurInput('fiscalCode')"
+        onkeyup="this.value = this.value.toUpperCase();"
       ></ion-input>
       <div style="height: 20px">
         <ion-label
