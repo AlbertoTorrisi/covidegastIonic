@@ -1,36 +1,54 @@
 <ion-content color="primary">
-  <img src="../assets/logo_covidApp.png">
-  <form #form="ngForm" (ngSubmit)="logIn()">
+  <img src="../assets/logo_covidApp.png" />
+  <form [formGroup]="loginForm" (ngSubmit)="logIn()">
     <ion-grid>
       <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
           <div padding>
             <ion-item>
               <ion-input
-                name="username"
+                (ionBlur)="blurInput('username')"
+                formControlName="username"
                 type="text"
                 placeholder="Username"
                 [(ngModel)]="username"
-                required
               ></ion-input>
+              <ion-label
+                color="danger"
+                *ngIf="
+                  blurUsername &&
+                  loginForm.controls['username'].hasError('required')
+                "
+                >Inserire Username Corretto</ion-label
+              >
             </ion-item>
             <ion-item>
               <ion-input
-                name="password"
+                (ionBlur)="blurInput('password')"
+                formControlName="password"
                 type="password"
                 placeholder="Password"
                 [(ngModel)]="password"
-                required
               ></ion-input>
-            </ion-item>
+              <ion-label
+                color="danger"
+                *ngIf="
+                  blurPassword &&
+                  loginForm.controls['password'].hasError('required')
+                "
+                >Passowrd errata</ion-label
+              ></ion-item
+            >
           </div>
           <div padding>
-            <ion-button style="--background:#eb445a"
+            <ion-button
+              style="--background: #eb445a"
               size="large"
               type="submit"
-              [disabled]="form.invalid"
+              [disabled]="loginForm.invalid"
               expand="block"
-              (click)="logIn()" >Log In</ion-button
+              (click)="logIn()"
+              >Log In</ion-button
             >
           </div>
         </ion-col>
