@@ -1,21 +1,23 @@
 <ion-content [fullscreen]="true">
   <ion-header>
-    <img src="../assets/logo-covidegast.jpg">
     <ion-toolbar>
-      <ion-title> Swabs Programming </ion-title>
+
+      <ion-title>    <img src="../assets/logo-covidegast.jpg">
+        </ion-title>
     </ion-toolbar>
     <ion-item-group>
       <ion-item class="datePicker">
-        <ion-label>Start Date</ion-label>
+        <ion-label><i class="fas fa-calendar-day"></i></ion-label>
         <ion-datetime
           value="1990-02-19"
-          placeholder="Start"
+          placeholder="From"
           [(ngModel)]="startDate"
         ></ion-datetime>
-        <ion-label>Ends Date</ion-label>
+        <ion-label><i class="fas fa-calendar-day"></i></ion-label>
         <ion-datetime
           value="1990-02-20"
-          placeholder="End"
+          style="font-family: Arial, 'Font Awesome 5 Free'"
+          placeholder="To"
           [(ngModel)]="endDate"
           (ionChange)="searchByDate()"
         ></ion-datetime>
@@ -29,14 +31,22 @@
         (click)="openModalSwab(null, false)"
         >Add Swab</ion-button
       >
+      <ion-button style="--background:#eb445a; padding: 5px;"
+        mode="ios"
+        
+        (click)="toggleSwabShown()"
+        >Today</ion-button
+      >
     </ion-item-group>
   </ion-header>
 
   <ion-content class="ion-margin">
-    <ion-row *ngFor="let day of daysSelected">
-      <ion-label>{{ day }}</ion-label>
+    <ion-col *ngFor="let day of daysSelected"             
+
+    >
+      <ion-label class="dateLabel">{{ day | date :  "dd/MM/y"  }}</ion-label>
       <ion-slides
-        [options]="{ slidesPerView: '2', zoom: false, grabCursor: true }"
+      [options]="{ slidesPerView: '2', zoom: false, grabCursor: true, direction: 'horizontal'}"
       >
         <ion-slide
           *ngFor="let swab of swabs[day]"
@@ -69,6 +79,8 @@
           </ion-label>
         </ion-slide>
       </ion-slides>
-    </ion-row>
+
+    </ion-col>
+
   </ion-content>
 </ion-content>

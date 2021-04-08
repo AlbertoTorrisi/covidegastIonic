@@ -1,32 +1,41 @@
 .datePicker {
   padding: 1%;
 }
-div[scrollx="true"] {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  ion-item {
-    min-width: 100px;
-  }
-}
-
-div[scrollx="true"] {
-  overflow-x: auto;
-}
-
-div[scrolly="true"] {
-  overflow-y: auto;
+.dateLabel{
+  border-radius: 3px;
+  background-color: #eb445a;
+  padding: 0px 10px;
+  color: #f2f2f2;
+  font-weight: bolder;
+  
 }
 ion-row {
   display: flex;
-  flex-direction: column;
 }
 ion-row ion-slides {
   display: flex;
   justify-content: flex-start;
+
+}
+.todayList{
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.swiper-wrapper{
+  justify-content: center;
+  align-items: center;
+
+  .swabCard{
+    width: 60vw !important;
+    height: 60vw !important;  
+    font-size: 1.5em;   
+  }
 }
 .swiper-container {
   margin: 0;
+  
 }
 .swabCard {
   display: flex;

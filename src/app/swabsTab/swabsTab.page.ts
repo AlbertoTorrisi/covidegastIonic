@@ -27,6 +27,7 @@ export class SwabsTabPage {
   endDate: string;
   swabToUpdate: Swab;
   errorDateBefore = false;
+  todaySwabsShown = false;
   public daysSelected: string[] = [];
 
   constructor(
@@ -40,9 +41,18 @@ export class SwabsTabPage {
     this.patients = await this.patientsService.getAllPatients();
     this.daysSelected = Object.keys(this.swabs);
   }
+  async showTodaySwabs(){
+    this.swabs = await this.swabService.allSwabsByDate(moment().format('YYYY-MM-DD'), moment().add(1,'day').format('YYYY-MM-DD'))
+    this.daysSelected = Object.keys(this.swabs);
+
+  }
+  async toggleSwabShown(){
+    this.todaySwabsShown = !this.todaySwabsShown;
+    this.todaySwabsShown ? this.showTodaySwabs() :this.searchByDate()
+  }
   async searchByDate() {
-    let searchStart = this.startDate.substring(0, 10);
-    let searchEnd = this.endDate.substring(0, 10);
+    let searchStart = this.startDate?.substring(0, 10);
+    let searchEnd = this.endDate?.substring(0, 10);
     this.errorDateBefore = moment(this.endDate).isBefore(this.startDate);
     if (!this.errorDateBefore) {
       this.swabs = await this.swabService.allSwabsByDate(
