@@ -1,15 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-<<<<<<< HEAD
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-=======
 import { fakeAsync } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
->>>>>>> 36b1ba2840d03a990b2ad5015b10431aed5ce2c4
 import { ModalController } from '@ionic/angular';
 import { Swab } from 'src/app/interface/list-of-swabs';
 import { Patient } from 'src/app/interface/patient';

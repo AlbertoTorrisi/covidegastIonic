@@ -1,7 +1,9 @@
 <ion-header mode="ios">
   <ion-toolbar>
     <ion-title>{{ date }} {{ time }}</ion-title>
-    <ion-button size="small" mode="ios" slot="end" (click)="dismissModal()">Chiudi</ion-button>
+    <ion-button style="--background:#868e96; --background-focused:#868e96; 
+    --background-hover:#868e96; --background-activated:#868e96;"
+    size="small" mode="ios" slot="end" (click)="dismissModal()">Close</ion-button>
   </ion-toolbar>
 </ion-header>
 <ion-label for="patient" class="col-sm-4 col-form-label">{{
@@ -106,54 +108,25 @@
     </ion-item>
     <ion-item>
       <ion-label>Done</ion-label>
-<<<<<<< HEAD
-      <ion-checkbox
-        color="primary"
-        mode="ios"
-        name="done"
-        formControlName="done"
-        [(ngModel)]="done"
-      ></ion-checkbox>
-=======
-      <ion-checkbox color="primary" mode="ios" name="done" formControlName="done" [(ngModel)]="done"></ion-checkbox>
+      <ion-checkbox color="success" mode="ios" name="done" formControlName="done" [(ngModel)]="done"></ion-checkbox>
 
->>>>>>> 36b1ba2840d03a990b2ad5015b10431aed5ce2c4
     </ion-item>
     <ion-item>
       <ion-label>Positive</ion-label>
-      <ion-checkbox color="primary" mode="ios" name="positive_res" formControlName="positive_res"
+      <ion-checkbox color="success" mode="ios" name="positive_res" formControlName="positive_res"
         [(ngModel)]="positive_res"></ion-checkbox>
     </ion-item>
     <p>{{ str(findInvalidControls()) }}</p>
-    <ion-button class="ion-padding" expand="block" [disabled]="formSwab.invalid" type="button" (click)="onSave()">Save
+    <ion-button style="--background:#69ca62; --background-focused:#69ca62; 
+    --background-hover:#69ca62; --background-activated:#69ca62;"
+     class="ion-padding" expand="block" [disabled]="formSwab.invalid" type="button" (click)="onSave()">Save
     </ion-button>
   </form>
 
   <div class="button-modal">
-<<<<<<< HEAD
-    <ion-button
-      *ngIf="editSwab"
-      class="ion-padding deleteSwab"
-      fill="clear"
-      [disabled]="formSwab.invalid"
-      type="button"
-      (click)="onDelete()"
-      ><i class="fas fa-times"></i>Delete Swab</ion-button
-    >
-    <ion-button
-      *ngIf="editSwab"
-      fill="clear"
-      class="ion-padding callPatient"
-      [disabled]="formSwab.invalid"
-      type="button"
-      href="tel: {{ phone }}"
-      ><i class="fas fa-phone"></i>Call Patient</ion-button
-    >
-=======
     <ion-button *ngIf="editSwab" class="ion-padding deleteSwab" fill="clear" [disabled]="formSwab.invalid" type="button"
       (click)="onDelete()"><i class="fas fa-times"></i>Delete Swab</ion-button>
     <ion-button *ngIf="editSwab" fill="clear" class="ion-padding callPatient" [disabled]="formSwab.invalid"
       type="button" href="tel: {{ phone }}"><i class="fas fa-phone"></i>Call Patient</ion-button>
->>>>>>> 36b1ba2840d03a990b2ad5015b10431aed5ce2c4
   </div>
 </ion-content>

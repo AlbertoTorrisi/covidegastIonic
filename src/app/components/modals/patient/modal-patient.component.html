@@ -1,8 +1,9 @@
 <ion-header mode="ios">
   <ion-toolbar>
     <ion-title>{{ name }} {{ fiscalCode }}</ion-title>
-    <ion-button size="small" mode="ios" slot="end" (click)="dismissModal()"
-      >Chiudi</ion-button
+    <ion-button style="--background:#868e96; --background-focused:#868e96; 
+    --background-hover:#868e96; --background-activated:#868e96;" size="small" mode="ios" slot="end" (click)="dismissModal()"
+      >Close</ion-button
     >
   </ion-toolbar>
 </ion-header>
@@ -147,14 +148,15 @@
     <ion-item>
       <ion-label>Positive</ion-label>
       <ion-checkbox
-        color="primary"
+        color="success"
         mode="ios"
         name="hasCovid"
         formControlName="hasCovid"
         [(ngModel)]="hasCovid"
       ></ion-checkbox>
     </ion-item>
-    <ion-button
+    <ion-button style="--background:#69ca62; --background-focused:#69ca62; 
+    --background-hover:#69ca62; --background-activated:#69ca62;"
       class="ion-padding"
       expand="block"
       [disabled]="!editPatient && formPatient.invalid"
