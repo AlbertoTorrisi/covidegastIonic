@@ -27,6 +27,7 @@ export class SwabsTabPage {
   endDate: string;
   swabToUpdate: Swab;
   errorDateBefore = false;
+  errorDateSame = false;
   public daysSelected: string[] = [];
 
   constructor(
@@ -43,11 +44,26 @@ export class SwabsTabPage {
   async searchByDate() {
     let searchStart = this.startDate.substring(0, 10);
     let searchEnd = this.endDate.substring(0, 10);
+    let searchDayAddtoFix = moment(searchEnd)
+      .add(1, 'days')
+      .format('YYYY-MM-DD');
+    let searchFix = searchDayAddtoFix.substring(0, 10);
     this.errorDateBefore = moment(this.endDate).isBefore(this.startDate);
-    if (!this.errorDateBefore) {
+    this.errorDateSame = moment(searchStart).isSame(searchEnd);
+    console.log(this.errorDateSame);
+    if (this.errorDateSame) {
       this.swabs = await this.swabService.allSwabsByDate(
         searchStart,
         searchEnd
+      );
+      this.daysSelected = Object.keys(this.swabs);
+      let dayToPush = this.daysSelected.find((day) => day === searchStart);
+      this.daysSelected.length = 0;
+      this.daysSelected.push(dayToPush);
+    } else if (!this.errorDateBefore) {
+      this.swabs = await this.swabService.allSwabsByDate(
+        searchStart,
+        searchFix
       );
       this.daysSelected = Object.keys(this.swabs);
     }

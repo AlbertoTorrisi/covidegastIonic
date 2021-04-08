@@ -1,5 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Swab } from 'src/app/interface/list-of-swabs';
 import { Patient } from 'src/app/interface/patient';

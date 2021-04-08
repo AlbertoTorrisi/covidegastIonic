@@ -26,7 +26,11 @@
     {{ patient.name }} - {{ patient.fiscal_code }}
   </ion-item>
 </ion-list>
-<ion-content mode="ios" class="ion-padding" style="display: flex; justify-content: center;">
+<ion-content
+  mode="ios"
+  class="ion-padding"
+  style="display: flex; justify-content: center"
+>
   <form [formGroup]="formSwab" mode="ios" (ngSubmit)="onSave()">
     <ion-item class="form-group row">
       <ion-label for="team_id">Team</ion-label>
@@ -98,7 +102,6 @@
         formControlName="done"
         [(ngModel)]="done"
       ></ion-checkbox>
-      
     </ion-item>
     <ion-item>
       <ion-label>Positive</ion-label>
@@ -122,23 +125,23 @@
   </form>
 
   <div class="button-modal">
-  <ion-button
-    *ngIf="editSwab"
-    class="ion-padding deleteSwab"
-    fill="clear"
-    [disabled]="formSwab.invalid"
-    type="button"
-    (click)="onDelete()"
-    ><i class="fas fa-times"></i>Delete Swab</ion-button
-  >
-  <ion-button
-    *ngIf="editSwab"
-    fill="clear"
-    class="ion-padding callPatient"
-    [disabled]="formSwab.invalid"
-    type="button"
-    href="tel: {{ phone }}"
-    ><i class="fas fa-phone"></i>Call Patient</ion-button
-  >
+    <ion-button
+      *ngIf="editSwab"
+      class="ion-padding deleteSwab"
+      fill="clear"
+      [disabled]="formSwab.invalid"
+      type="button"
+      (click)="onDelete()"
+      ><i class="fas fa-times"></i>Delete Swab</ion-button
+    >
+    <ion-button
+      *ngIf="editSwab"
+      fill="clear"
+      class="ion-padding callPatient"
+      [disabled]="formSwab.invalid"
+      type="button"
+      href="tel: {{ phone }}"
+      ><i class="fas fa-phone"></i>Call Patient</ion-button
+    >
   </div>
 </ion-content>
