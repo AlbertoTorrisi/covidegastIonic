@@ -72,7 +72,6 @@ export class ModalPatientComponent implements OnInit {
   }
 
   blurInput = (formName) => {
-    console.log('lbur');
     if (formName === 'name') this.blurName = true;
     if (formName === 'address') this.blurAddress = true;
     if (formName === 'dob') this.blurDob = true;

@@ -1,10 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
+=======
+import { fakeAsync } from '@angular/core/testing';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+>>>>>>> 36b1ba2840d03a990b2ad5015b10431aed5ce2c4
 import { ModalController } from '@ionic/angular';
 import { Swab } from 'src/app/interface/list-of-swabs';
 import { Patient } from 'src/app/interface/patient';
@@ -26,10 +31,16 @@ export class ModalSwabComponent implements OnInit {
   formSwab: FormGroup;
   @Input() phone: string;
   @Input() editSwab: boolean;
+  blurTeamId: boolean=false;
+  blurDate:boolean=false;
+  blurTime:boolean=false;
+  blurType:boolean=false;
+  blurPatientId:boolean=false;
   filter: string;
   hidePatientList: boolean = false;
   patient_name: string = '';
   str = JSON.stringify;
+  
   constructor(builder: FormBuilder, private modalCtrl: ModalController) {
     this.formSwab = builder.group({
       team_id: [this.team_id, Validators.required],
@@ -42,6 +53,14 @@ export class ModalSwabComponent implements OnInit {
     });
   }
 
+  blurInput = (formName) => {
+    if (formName === 'team_id') this.blurTeamId = true;
+    if (formName === 'date') this.blurDate = true;
+    if (formName === 'time') this.blurTime = true;
+    if (formName === 'type') this.blurType = true;
+    if (formName === 'patient_id') this.blurPatientId = true;
+  };
+   
   public findInvalidControls() {
     const invalid = [];
     const controls = this.formSwab.controls;

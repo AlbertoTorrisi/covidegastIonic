@@ -1,28 +1,19 @@
 <ion-header mode="ios">
   <ion-toolbar>
     <ion-title>{{ date }} {{ time }}</ion-title>
-    <ion-button size="small" mode="ios" slot="end" (click)="dismissModal()"
-      >Chiudi</ion-button
-    >
+    <ion-button size="small" mode="ios" slot="end" (click)="dismissModal()">Chiudi</ion-button>
   </ion-toolbar>
 </ion-header>
 <ion-label for="patient" class="col-sm-4 col-form-label">{{
   patient_name
-}}</ion-label>
+  }}</ion-label>
 
 <!-- <ion-button (click)="setShowPatientList()">Patients List</ion-button> -->
-<ion-searchbar
-  [(ngModel)]="hidePatients && filter"
-  (ionFocus)="showPatients()"
-  [placeholder]="patient_name"
-  debounce="500"
-></ion-searchbar>
+<ion-searchbar [(ngModel)]="hidePatients && filter" (ionFocus)="showPatients()" [placeholder]="patient_name"
+  debounce="500"></ion-searchbar>
 <ion-list [hidden]="hidePatientList">
-  <ion-item
-    [hidden]="!filterPatient(patient)"
-    *ngFor="let patient of patients"
-    (click)="selectPatientID(patient.patient_id)"
-  >
+  <ion-item [hidden]="!filterPatient(patient)" *ngFor="let patient of patients"
+    (click)="selectPatientID(patient.patient_id)">
     {{ patient.name }} - {{ patient.fiscal_code }}
   </ion-item>
 </ion-list>
@@ -34,67 +25,88 @@
   <form [formGroup]="formSwab" mode="ios" (ngSubmit)="onSave()">
     <ion-item class="form-group row">
       <ion-label for="team_id">Team</ion-label>
-      <ion-select
-        formControlName="team_id"
-        class="form-select"
-        aria-label="team_id"
-        [(ngModel)]="team_id"
-      >
+      <ion-select formControlName="team_id" class="form-select" aria-label="team_id" [(ngModel)]="team_id"
+      (ionCancel)="blurInput('team_id')">
         <ion-select-option value="1">Sambataro - Carciotto</ion-select-option>
         <ion-select-option value="2">Del Pozzo - Montorsi</ion-select-option>
         <ion-select-option value="3">Mangione - Serra</ion-select-option>
       </ion-select>
+      <div style="height: 20px">
+        <ion-label
+          class="ion-label-error"
+          *ngIf="blurTeamId && formSwab.controls['team_id'].hasError('required')"
+          position="stacked"
+          color="danger"
+          >Il Team è obbligatorio</ion-label
+        >
+      </div>
     </ion-item>
     <ion-item class="control">
       <ion-label position="floating">Date</ion-label>
-      <ion-datetime
-        placeholder=""
-        [pickerOptions]="pickerDate"
-        formControlName="date"
-        [(ngModel)]="date"
-      ></ion-datetime>
+      <ion-datetime placeholder="" [pickerOptions]="pickerDate" formControlName="date" [(ngModel)]="date"
+      (ionCancel)="blurInput('date')">
+      </ion-datetime>
+      <div style="height: 20px">
+        <ion-label
+          class="ion-label-error"
+          *ngIf="blurDate && formSwab.controls['date'].hasError('required')"
+          position="stacked"
+          color="danger"
+          >La data è obbligatoria</ion-label
+        >
+      </div>
       <ion-label position="floating">Time</ion-label>
-      <ion-datetime
-        display-format="HH:mm"
-        picker-format="HH:mm"
-        formControlName="time"
-        [(ngModel)]="time"
-      ></ion-datetime>
+      <ion-datetime display-format="HH:mm" picker-format="HH:mm" formControlName="time" [(ngModel)]="time"
+      (ionCancel)="blurInput('time')">
+      </ion-datetime>
+      <div style="height: 20px">
+        <ion-label
+          class="ion-label-error"
+          *ngIf="blurTime && formSwab.controls['time'].hasError('required')"
+          position="stacked"
+          color="danger"
+          >l'orario è obbligatorio</ion-label
+        >
+      </div>
     </ion-item>
     <ion-item class="form-group row">
-      <ion-label for="swab" class="col-sm-4 col-form-label"
-        >Swab Type</ion-label
-      >
-      <ion-select
-        formControlName="type"
-        class="form-select"
-        aria-label="swab type"
-        [(ngModel)]="type"
-      >
+      <ion-label for="swab" class="col-sm-4 col-form-label">Swab Type</ion-label>
+      <ion-select formControlName="type" class="form-select" aria-label="swab type" [(ngModel)]="type"
+      (ionCancel)="blurInput('time')">
         <ion-select-option value="mol">Molecular</ion-select-option>
         <ion-select-option value="rap">Rapid</ion-select-option>
       </ion-select>
+      <div style="height: 20px">
+        <ion-label
+          class="ion-label-error"
+          *ngIf="blurTime && formSwab.controls['type'].hasError('required')"
+          position="stacked"
+          color="danger"
+          >Il tipo di tampone è obbligatorio</ion-label
+        >
+      </div>
     </ion-item>
     <ion-item>
-      <ion-select
-        class="form-select"
-        aria-label="patient_id"
-        formControlName="patient_id"
-        [(ngModel)]="patient_id"
-        placeholder="Select a patient"
-        (ionChange)="selectPatientID()"
-      >
-        <ion-select-option
-          *ngFor="let patient of patients"
-          value="{{ patient.patient_id }}"
-          (click)="selectPatientID(patient.patient_id)"
-        >
+      <ion-select class="form-select" aria-label="patient_id" formControlName="patient_id" [(ngModel)]="patient_id"
+        placeholder="Select a patient" (ionChange)="selectPatientID()" (ionCancel)="blurInput('patient_id')">
+        <ion-select-option *ngFor="let patient of patients" value="{{ patient.patient_id }}"
+          (click)="selectPatientID(patient.patient_id)">
           {{ patient.name }} - {{ patient.fiscal_code }}
         </ion-select-option>
       </ion-select>
+      <div style="height: 20px">
+        <ion-label
+          class="ion-label-error"
+          *ngIf="blurPatientId && formSwab.controls['patient_id'].hasError('required')"
+          position="stacked"
+          color="danger"
+          >Il paziente è obbligatorio</ion-label
+        >
+      </div>
     </ion-item>
     <ion-item>
       <ion-label>Done</ion-label>
+<<<<<<< HEAD
       <ion-checkbox
         color="primary"
         mode="ios"
@@ -102,29 +114,23 @@
         formControlName="done"
         [(ngModel)]="done"
       ></ion-checkbox>
+=======
+      <ion-checkbox color="primary" mode="ios" name="done" formControlName="done" [(ngModel)]="done"></ion-checkbox>
+
+>>>>>>> 36b1ba2840d03a990b2ad5015b10431aed5ce2c4
     </ion-item>
     <ion-item>
       <ion-label>Positive</ion-label>
-      <ion-checkbox
-        color="primary"
-        mode="ios"
-        name="positive_res"
-        formControlName="positive_res"
-        [(ngModel)]="positive_res"
-      ></ion-checkbox>
+      <ion-checkbox color="primary" mode="ios" name="positive_res" formControlName="positive_res"
+        [(ngModel)]="positive_res"></ion-checkbox>
     </ion-item>
     <p>{{ str(findInvalidControls()) }}</p>
-    <ion-button
-      class="ion-padding"
-      expand="block"
-      [disabled]="formSwab.invalid"
-      type="button"
-      (click)="onSave()"
-      >Save</ion-button
-    >
+    <ion-button class="ion-padding" expand="block" [disabled]="formSwab.invalid" type="button" (click)="onSave()">Save
+    </ion-button>
   </form>
 
   <div class="button-modal">
+<<<<<<< HEAD
     <ion-button
       *ngIf="editSwab"
       class="ion-padding deleteSwab"
@@ -143,5 +149,11 @@
       href="tel: {{ phone }}"
       ><i class="fas fa-phone"></i>Call Patient</ion-button
     >
+=======
+    <ion-button *ngIf="editSwab" class="ion-padding deleteSwab" fill="clear" [disabled]="formSwab.invalid" type="button"
+      (click)="onDelete()"><i class="fas fa-times"></i>Delete Swab</ion-button>
+    <ion-button *ngIf="editSwab" fill="clear" class="ion-padding callPatient" [disabled]="formSwab.invalid"
+      type="button" href="tel: {{ phone }}"><i class="fas fa-phone"></i>Call Patient</ion-button>
+>>>>>>> 36b1ba2840d03a990b2ad5015b10431aed5ce2c4
   </div>
 </ion-content>
