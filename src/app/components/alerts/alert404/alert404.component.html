@@ -1,7 +1,39 @@
 <ion-content>
-			<h1>404</h1>		
-			<h2>Oops! Quello che stai cercando non è stato trovato</h2>
-			<p>Non preoccuparti! Aggiungi un nuovo tampone oppure Controlla tutti i pazienti registrati</p>
-      <ion-button mode="ios" class="ion-padding"  (click)="notFoundToPatient()">Vedi Pazienti</ion-button>
-      <app-swab-add></app-swab-add>
+  <img src="../assets/logo_covidApp.png" />
+</ion-content>
+<ion-content class="ion-text-center">
+  <h1>ERRORE 404!</h1>
+  <h2>Oops! Quello che stai cercando non è stato trovato</h2>
+  <p>
+    Non preoccuparti! Aggiungi un nuovo tampone oppure Controlla tutti i
+    pazienti registrati
+  </p>
+  <ion-button
+    style="
+      --background: #69ca62;
+      --background-focused: #69ca62;
+      --background-hover: #69ca62;
+      --background-activated: #69ca62;
+      padding: 5px;
+    "
+    mode="ios"
+    class="ion-padding"
+    type="submit"
+    (click)="from404toPatient()"
+    >Pazienti</ion-button
+  >
+  <ion-button
+    style="
+      --background: #69ca62;
+      --background-focused: #69ca62;
+      --background-hover: #69ca62;
+      --background-activated: #69ca62;
+      padding: 5px;
+    "
+    mode="ios"
+    class="ion-padding"
+    type="submit"
+    (click)="from404toSwab()"
+    >Calendario Swabs</ion-button
+  >
 </ion-content>

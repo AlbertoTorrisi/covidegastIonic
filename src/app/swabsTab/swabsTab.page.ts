@@ -35,21 +35,24 @@ export class SwabsTabPage {
     public modalController: ModalController,
     private alertController: AlertController,
     private swabService: SwabsService,
-    private patientsService: PatientsService
+    private patientsService: PatientsService,
+    private alertCtrl: AlertController
   ) {}
   async ngOnInit() {
     this.swabs = await this.swabService.allSwabsByDate(new Date(), new Date());
     this.patients = await this.patientsService.getAllPatients();
     this.daysSelected = Object.keys(this.swabs);
   }
-  async showTodaySwabs(){
-    this.swabs = await this.swabService.allSwabsByDate(moment().format('YYYY-MM-DD'), moment().add(1,'day').format('YYYY-MM-DD'))
+  async showTodaySwabs() {
+    this.swabs = await this.swabService.allSwabsByDate(
+      moment().format('YYYY-MM-DD'),
+      moment().add(1, 'day').format('YYYY-MM-DD')
+    );
     this.daysSelected = Object.keys(this.swabs);
-
   }
-  async toggleSwabShown(){
+  async toggleSwabShown() {
     this.todaySwabsShown = !this.todaySwabsShown;
-    this.todaySwabsShown ? this.showTodaySwabs() :this.searchByDate()
+    this.todaySwabsShown ? this.showTodaySwabs() : this.searchByDate();
   }
   async searchByDate() {
     let searchStart = this.startDate?.substring(0, 10);
@@ -61,7 +64,15 @@ export class SwabsTabPage {
     this.errorDateBefore = moment(this.endDate).isBefore(this.startDate);
     this.errorDateSame = moment(searchStart).isSame(searchEnd);
     console.log(this.errorDateSame);
-    if (this.errorDateSame) {
+    if (this.errorDateBefore) {
+      const alert = this.alertCtrl
+        .create({
+          header: 'ERROR',
+          message: 'La data di fine è precedente alla data di inizio',
+          buttons: ['OK'],
+        })
+        .then((alert) => alert.present());
+    } else if (this.errorDateSame) {
       this.swabs = await this.swabService.allSwabsByDate(
         searchStart,
         searchEnd
@@ -117,8 +128,10 @@ export class SwabsTabPage {
         dateToPush,
         swabModified.value.type,
         swabModified.value.patient_id,
-        Number(swabModified.value.done),
-        Number(swabModified.value.positive_res),
+        Number(swabModified.value.done) ? Number(swabModified.value.done) : 1,
+        Number(swabModified.value.positive_res)
+          ? Number(swabModified.value.positive_res)
+          : 1,
       ];
       const res = editSwab
         ? this.swabService.updateSwab(swab.swab_id, ...swabFinal)

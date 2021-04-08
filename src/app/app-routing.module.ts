@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'notFound', component: Alert404Component },
-  // { path: '*', redirectTo: 'notFound', pathMatch: 'full' },
+  { path: '**', redirectTo: 'notFound', pathMatch: 'full' },
 ];
 @NgModule({
   imports: [
