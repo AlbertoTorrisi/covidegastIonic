@@ -25,3 +25,11 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+* {
+  font-family: Poppins;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #3b3b3b;
+}
